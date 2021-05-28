@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('file:background.png'); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <BorderPane prefHeight="84.0" prefWidth="1280.0" style="-fx-background-color: rgb(0, 19, 30, 0.5);" BorderPane.alignment="CENTER">
+         <center>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="190.0" style="-fx-padding: 0.20em 0.2em; -fx-border-radius: .25em; -fx-border-width: 0.1em; -fx-border-fill: #2a0665;" stylesheets="@hover.css" text="Start Client" textAlignment="CENTER" textFill="#005151" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semibold" size="28.0" />
+               </font>
+               <effect>
+                  <DropShadow height="24.0" radius="11.5" width="24.0">
+                     <color>
+                        <Color red="0.16470588743686676" green="0.0235294122248888" blue="0.3960784375667572" />
+                     </color>
+                     <input>
+                        <Glow level="0.59">
+                           <input>
+                              <Bloom threshold="0.0" />
+                           </input>
+                        </Glow>
+                     </input>
+                  </DropShadow>
+               </effect>
+            </Label>
+         </center>
+         <left>
+            <HBox prefHeight="60.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="87.0" prefWidth="193.0" text="Settings" textAlignment="CENTER" textFill="#40518a">
+                     <font>
+                        <Font name="Digital-7 Mono" size="34.0" />
+                     </font>
+                     <effect>
+                        <Bloom threshold="0.0" />
+                     </effect>
+                  </Label>
+               </children>
+            </HBox>
+         </left>
+      </BorderPane>
+   </bottom>
+   <left>
+      <VBox prefHeight="636.0" prefWidth="193.0" style="-fx-background-color: rgb(0, 19, 30, 0.5);" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="193.0" text="Login" textAlignment="CENTER" textFill="#40518a">
+                     <font>
+                        <Font name="Digital-7 Mono" size="34.0" />
+                     </font>
+                     <effect>
+                        <Bloom threshold="0.0" />
+                     </effect>
+                  </Label>
+               </children>
+            </HBox>
+            <BorderPane prefHeight="574.0" prefWidth="193.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets top="40.0" />
+               </padding>
+               <top>
+                  <Label contentDisplay="CENTER" prefHeight="73.0" prefWidth="183.0" text="Gamemodes:" textFill="#40518a" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Digital-7 Mono" size="34.0" />
+                     </font>
+                     <effect>
+                        <Bloom threshold="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="31.0" prefWidth="193.0" style="-fx-border-color: rgb(0, 19, 29, .3); -fx-border-width: 5px;" styleClass="hbox" stylesheets="@hover2.css">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Bedwars.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="7.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="193.0" text="Bedwars" textAlignment="CENTER" textFill="#884bd6">
+                                 <font>
+                                    <Font name="Digital-7 Mono" size="28.0" />
+                                 </font>
+                                 <effect>
+                                    <Bloom threshold="0.0" />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="31.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Skywars.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="7.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="193.0" text="Skywars" textAlignment="CENTER" textFill="#40518a">
+                                 <font>
+                                    <Font name="Digital-7 Mono" size="28.0" />
+                                 </font>
+                                 <effect>
+                                    <Bloom threshold="0.0" />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <TabPane focusTraversable="false" prefHeight="200.0" prefWidth="200.0" styleClass="tabpane" stylesheets="@tabs.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab closable="false" text="Info" />
+          <Tab closable="false" text="Leaderboard" />
+            <Tab closable="false" text="Changelog" />
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
