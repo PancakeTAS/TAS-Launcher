@@ -15,11 +15,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('/background.png'); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('/background.png'); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pfannekuchen.tasbattlelauncher.TASBattleLauncher">
    <bottom>
       <BorderPane prefHeight="84.0" prefWidth="1280.0" style="-fx-background-color: rgb(0, 19, 30, 0.5);" BorderPane.alignment="CENTER">
          <center>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="190.0" style="-fx-padding: 0.20em 0.2em; -fx-border-radius: .25em; -fx-border-width: 0.1em; -fx-border-fill: #2a0665;" stylesheets="@hover.css" text="Start Client" textAlignment="CENTER" textFill="#005151" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#startClient" prefHeight="56.0" prefWidth="190.0" style="-fx-padding: 0.20em 0.2em; -fx-border-radius: .25em; -fx-border-width: 0.1em; -fx-border-fill: #2a0665;" stylesheets="@hover.css" text="Start Client" textAlignment="CENTER" textFill="#005151" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Segoe UI Semibold" size="28.0" />
                </font>
@@ -42,7 +42,7 @@
          <left>
             <HBox prefHeight="60.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="87.0" prefWidth="193.0" text="Settings" textAlignment="CENTER" textFill="#40518a">
+                  <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#openSettings" prefHeight="87.0" prefWidth="193.0" text="Settings" textAlignment="CENTER" textFill="#40518a">
                      <font>
                         <Font name="Digital-7 Mono" size="34.0" />
                      </font>
@@ -60,7 +60,7 @@
          <children>
             <HBox prefHeight="60.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="193.0" text="Login" textAlignment="CENTER" textFill="#40518a">
+                  <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#openLoginDialog" prefHeight="79.0" prefWidth="193.0" text="Login" textAlignment="CENTER" textFill="#40518a">
                      <font>
                         <Font name="Digital-7 Mono" size="34.0" />
                      </font>
@@ -90,7 +90,7 @@
                <center>
                   <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox prefHeight="31.0" prefWidth="193.0" style="-fx-border-color: rgb(0, 19, 29, .3); -fx-border-width: 5px;" styleClass="hbox" stylesheets="@hover2.css">
+                        <HBox onMouseClicked="#selectBedwars" prefHeight="31.0" prefWidth="193.0" style="-fx-border-color: rgb(0, 19, 29, .3); -fx-border-width: 5px;" styleClass="hbox" stylesheets="@hover2.css">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -100,7 +100,7 @@
                                     <Insets left="7.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="193.0" text="Bedwars" textAlignment="CENTER" textFill="#884bd6">
+                              <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSkywars" prefHeight="79.0" prefWidth="193.0" text="Bedwars" textAlignment="CENTER" textFill="#884bd6">
                                  <font>
                                     <Font name="Digital-7 Mono" size="28.0" />
                                  </font>

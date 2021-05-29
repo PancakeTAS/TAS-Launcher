@@ -1,6 +1,4 @@
-package de.pfannekuchen.tasbattlelauncher.main;
-
-import de.pfannekuchen.tasbattlelauncher.TASBattleLauncher;
+package de.pfannekuchen.tasbattlelauncher;
 
 public class Main {
 

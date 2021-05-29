@@ -26,4 +26,5 @@ dependencies {
 	include group: 'org.openjfx', name: 'controls', version: '16'
 	include group: 'org.openjfx', name: 'fxml', version: '16'
 	include group: 'org.openjfx', name: 'graphics', version: '16'
+	include group: 'de.pfannekuchen', name: 'accountapi', version: '1.0.0'	
 }
