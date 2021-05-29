@@ -2,10 +2,28 @@ plugins {
     id 'java-library'
 }
 
+// Export for Java 16 Only
+sourceCompatibility = targetCompatibility = 1.16
+
 repositories {
     maven { url = "https://mgnet.work/repo" }
 }
 
-dependencies {
+jar {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+    	configurations.include.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
 
+configurations {
+	include
+	implementation.extendsFrom(include)
+}
+
+dependencies {
+	include group: 'org.openjfx', name: 'base', version: '16'
+	include group: 'org.openjfx', name: 'controls', version: '16'
+	include group: 'org.openjfx', name: 'fxml', version: '16'
+	include group: 'org.openjfx', name: 'graphics', version: '16'
 }
