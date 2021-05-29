@@ -1,6 +1,5 @@
 package de.pfannekuchen.tasbattlelauncher;
 
-import de.pfannekuchen.accountapi.MicrosoftAccount;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,16 +66,7 @@ public class TASBattleLauncher extends Application {
 	 * TODO: Show a Pop-up where you can log into Microsoft or Mojang Account
 	 */
 	@FXML private void openLoginDialog() {
-		// TEST CODE!
-		try {
-			MicrosoftAccount account = new MicrosoftAccount();
-			if (account.ownsMinecraft()) {
-				System.err.println("Login Successful");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// TEST CODE ENDS HERE
+		
 	}
 	
 }
