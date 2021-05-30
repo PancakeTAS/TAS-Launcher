@@ -4,11 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -140,9 +143,103 @@
    <center>
       <TabPane focusTraversable="false" prefHeight="200.0" prefWidth="200.0" styleClass="tabpane" stylesheets="@tabs.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab closable="false" text="Info" />
-          <Tab closable="false" text="Leaderboard" />
-            <Tab closable="false" text="Changelog" />
+          <Tab closable="false" text="Info">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content></Tab>
+          <Tab closable="false" text="Leaderboard">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <Label alignment="CENTER" layoutX="706.0" layoutY="47.0" prefHeight="120.0" prefWidth="289.0" text="Your Rank: #1" textAlignment="CENTER" textFill="#2970c6" wrapText="true">
+                           <font>
+                              <Font name="Digital-7 Mono" size="47.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.32">
+                                 <input>
+                                    <Bloom threshold="0.0" />
+                                 </input>
+                              </Glow>
+                           </effect>
+                        </Label>
+                        <TextArea layoutX="664.0" layoutY="185.0" prefHeight="356.0" prefWidth="373.0" style="-fx-text-fill: #005151;" stylesheets="@textarea.css" text="Final Kills: 55&#10;Kills: 56&#10;Final Deaths: 245&#10;Deaths: 24&#10;&#10;KDR: 420&#10;FKDR:  99.213213123&#10;&#10;Wins: 51&#10;Losses: 555&#10;Win Chance: 99%&#10;&#10;Beds broken: 44">
+                           <font>
+                              <Font name="LCDMono2 Bold" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow>
+                                 <input>
+                                    <Glow level="1.0" />
+                                 </input>
+                                 <color>
+                                    <Color red="0.5218912363052368" green="0.2077241688966751" blue="0.8157894611358643" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </TextArea>
+                        <TextArea layoutX="14.0" layoutY="133.0" prefHeight="440.0" prefWidth="607.0" style="-fx-text-fill: #005151;" stylesheets="@textarea.css" text="#1 Pancake&#10;#2 Pancake&#10;#3 Pancake&#10;#4 Pancake&#10;#5 Pancake&#10;#6 Pancake&#10;#7 Pancake&#10;#8 Pancake&#10;#9 Pancake&#10;#10 Pancake&#10;#11 Pancake&#10;#12 Pancake&#10;#13 Pancake&#10;#14 Pancake&#10;#15 Pancake">
+                           <font>
+                              <Font name="LCDMono2 Light" size="18.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.68">
+                                 <input>
+                                    <Bloom threshold="0.0">
+                                       <input>
+                                          <InnerShadow height="5.0" radius="2.0" width="5.0" />
+                                       </input>
+                                    </Bloom>
+                                 </input>
+                              </Glow>
+                           </effect>
+                        </TextArea>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="120.0" prefWidth="607.0" text="Top Players" textAlignment="CENTER" textFill="#2970c6" wrapText="true">
+                           <font>
+                              <Font name="Digital-7 Mono" size="43.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.32">
+                                 <input>
+                                    <Bloom threshold="0.0" />
+                                 </input>
+                              </Glow>
+                           </effect>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
+            <Tab closable="false" text="Changelog">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextArea editable="false" layoutX="14.0" layoutY="97.0" prefHeight="491.0" prefWidth="1049.0" style="-fx-text-fill: #884bd6;" stylesheets="@textarea.css" text="- This is a Demo Changelog You probably already know that Bedwars doesn't exist yet&#10;- 69 different Teams&#10;- 420 Beds&#10;">
+                           <font>
+                              <Font name="Dungeon" size="18.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.29">
+                                 <input>
+                                    <Bloom threshold="0.0" />
+                                 </input>
+                              </Glow>
+                           </effect>
+                        </TextArea>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="83.0" prefWidth="1045.0" text="Bedwars Release v1.0" textFill="#971313">
+                           <font>
+                              <Font name="Digital-7 Mono" size="34.0" />
+                           </font>
+                           <effect>
+                              <Glow level="1.0">
+                                 <input>
+                                    <Bloom threshold="0.0" />
+                                 </input>
+                              </Glow>
+                           </effect>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
         </tabs>
       </TabPane>
    </center>
