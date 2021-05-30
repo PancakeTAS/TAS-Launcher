@@ -1,9 +1,13 @@
 package de.pfannekuchen.tasbattlelauncher;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 
 /**
@@ -65,8 +69,29 @@ public class TASBattleLauncher extends Application {
 	 * Automatically called by the Gui once you click on "Login"
 	 * TODO: Show a Pop-up where you can log into Microsoft or Mojang Account
 	 */
-	@FXML private void openLoginDialog() {
-		
+	@FXML private void openLoginDialog() throws IOException {
+		Stage stage = new Stage();
+		stage.setScene(new Scene(new FXMLLoader(getClass().getResource("Login.fxml")).load()));
+		stage.show();
+	}
+	
+	@FXML private ProgressIndicator indicator;
+	@FXML private Label errorlabel;
+	
+	/**
+	 * Automatically called by the Gui once you click on "Sign-in" in the Login Dialog Pane
+	 * TODO: Sign into the Mojang Account
+	 */
+	@FXML private void login_signin() {
+		indicator.setVisible(true);
+	}
+	
+	/**
+	 * Automatically called by the Gui once you click on "Microsoft Login" in the Login Dialog Pane
+	 * TODO: Sign into the Microsoft Account
+	 */
+	@FXML private void login_microsoft() {
+
 	}
 	
 }

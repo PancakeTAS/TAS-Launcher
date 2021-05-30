@@ -6,7 +6,7 @@ plugins {
 
 javafx {
     version = "16"
-    modules = ['javafx.fxml','javafx.controls']
+    modules = ['javafx.fxml','javafx.controls','javafx.graphics']
 }
 
 version = "1.0.0"
@@ -37,31 +37,12 @@ jlink {
 
 repositories {
 	mavenCentral()
+	maven { url = "https://mgnet.work/repo" }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+dependencies {
+	
+}
 
 project.getAllTasks(true).each { key, val -> 
 	val.each {

@@ -1,0 +1,9 @@
+.label {
+  -fx-text-fill: #5b6f72;
+  -fx-border-color: #5b6f72;
+}
+
+.label:hover {
+  -fx-border-color: #8aa7ab;
+  -fx-text-fill: #8aa7ab;
+}
