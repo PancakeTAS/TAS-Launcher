@@ -12,9 +12,6 @@ import de.pfannekuchen.accountapi.MicrosoftAccount;
 import de.pfannekuchen.accountapi.MojangAccount;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,10 +19,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.web.WebView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import netscape.javascript.JSObject;
 
 /**
  * Entry Point for the TAS Battle Launcher (JavaFX Application)
@@ -35,7 +32,7 @@ public class TASBattleLauncher extends Application {
 
 	public static final File accountsFile = new File("accounts");
 	public static Object mcaccount;
-	private static StringProperty accountlabel;
+	private static Label accountlabel;
 	
 	/**
 	 * You cannot start JavaFX from the Class itself, so here is a static method to do that
@@ -49,38 +46,11 @@ public class TASBattleLauncher extends Application {
 	 */
 	@Override public void start(Stage stage) throws Exception {
 		/* Load FXML File and display it */
-		final WebView view = new WebView();
-		view.setCache(true);
-		view.getEngine().setJavaScriptEnabled(true);
-		view.getEngine().load("https://mgnet.work/tasbattlelauncher/index.html");
-		view.getEngine().getLoadWorker().stateProperty().addListener((a, b, c) -> {
-			if (c == State.SUCCEEDED) {
-				view.setVisible(true);
-				Platform.runLater(() -> {
-					stage.setOpacity(1);
-				});
-			}
-		});
-		// view.getEngine().documentProperty().get().getElementById("login_label").setTextContent("");
-		view.setPrefSize(1280, 720);
-		stage.setScene(new Scene(view));
-		view.setVisible(false);
-		stage.getScene().setFill(Color.TRANSPARENT);
-		stage.setOpacity(0);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+		stage.setScene(new Scene(loader.load()));
 		stage.show();
-		
-		// Setup Properties
-		accountlabel = new SimpleStringProperty("Login");
-		view.getEngine().getLoadWorker().workDoneProperty().addListener((i) -> {
-			accountlabel.addListener((c, b, a) -> {
-				Platform.runLater(() -> {
-					view.getEngine().documentProperty().get().getElementById("login_label").setTextContent(a);
-				});
-			});
-		});
-		((JSObject) view.getEngine().executeScript("window")).setMember("app", this);
-        
-		
+		accountlabel = (Label) ((HBox) ((VBox) ((BorderPane) stage.getScene().getRoot()).getLeft()).getChildren().get(0)).getChildren().get(0);
+		/* Thread for Loading an Account from the Accounts File */
 		Thread accountLoader = new Thread(new Runnable() {
 			
 			@Override
@@ -111,7 +81,9 @@ public class TASBattleLauncher extends Application {
 								writer.println(((MojangAccount) mcaccount).getClientUuid().toString());
 								writer.close();
 							}
-							accountlabel.set(name);
+							Platform.runLater(() -> {
+								accountlabel.setText(name);
+							});
 						} catch (Exception e) {
 							System.err.println("Could not load MC Account from File");
 							e.printStackTrace();
@@ -131,16 +103,15 @@ public class TASBattleLauncher extends Application {
 	 * Automatically called by the Gui once you click on "Start Client"
 	 * TODO: Start the Minecraft Client and or Set it up
 	 */
-	public void startClient() {
+	@FXML private void startClient() {
 		
 	}
-	
 	
 	/**
 	 * Automatically called by the Gui once you click on "Settings"
 	 * TODO: Open Settings Menu here
 	 */
-	public void openSettings() {
+	@FXML private void openSettings() {
 		
 	}
 
@@ -148,7 +119,7 @@ public class TASBattleLauncher extends Application {
 	 * Automatically called by the Gui once you click on "Bedwars"
 	 * TODO: Fetch Bedwars Information and Display Pane
 	 */
-	public void selectBedwars() {
+	@FXML private void selectBedwars() {
 		
 	}
 	
@@ -156,29 +127,19 @@ public class TASBattleLauncher extends Application {
 	 * Automatically called by the Gui once you click on "Skywars"
 	 * TODO: Fetch Skywars Information and Display Pane
 	 */
-	public void selectSkywars() {
+	@FXML private void selectSkywars() {
 		
 	}
-	
-	/**
-	 * Automatically called by the Gui once you click on "FFA"
-	 * TODO: Fetch FFA Information and Display Pane
-	 */
-	public void selectFFA() {
-		
-	}
-	
 	
 	/**
 	 * Automatically called by the Gui once you click on "Login"
+	 * TODO: Show a Pop-up where you can log into Microsoft or Mojang Account
 	 */
-	public void openLoginDialog() throws IOException {
+	@FXML private void openLoginDialog() throws IOException {
 		loginStage = new Stage();
 		loginStage.setScene(new Scene(new FXMLLoader(getClass().getResource("Login.fxml")).load()));
 		loginStage.show();
 	}
-	
-	// From here on is the FXML Portion, everything here is downloaded and Local!
 	
 	private static Stage loginStage;
 	@FXML private ProgressIndicator indicator;
@@ -188,6 +149,7 @@ public class TASBattleLauncher extends Application {
 	
 	/**
 	 * Automatically called by the Gui once you click on "Sign-in" in the Login Dialog Pane
+	 * TODO: Sign into the Mojang Account
 	 */
 	@FXML private void login_signin() {
 		indicator.setVisible(true);
@@ -203,7 +165,7 @@ public class TASBattleLauncher extends Application {
 				writer.close();
 				/* Close Dialog */
 				Platform.runLater(() -> {
-					accountlabel.set(account.getUsername());
+					accountlabel.setText(account.getUsername());
 					loginStage.close();
 				});
 			} catch (Exception e) {
@@ -222,6 +184,7 @@ public class TASBattleLauncher extends Application {
 	
 	/**
 	 * Automatically called by the Gui once you click on "Microsoft Login" in the Login Dialog Pane
+	 * TODO: Sign into the Microsoft Account
 	 */
 	@FXML private void login_microsoft() {
 		indicator.setVisible(true);
@@ -237,7 +200,7 @@ public class TASBattleLauncher extends Application {
 				writer.close();
 				/* Close Dialog */
 				Platform.runLater(() -> {
-					accountlabel.set(account.getUsername());
+					accountlabel.setText(account.getUsername());
 					loginStage.close();
 				});
 			} catch (Exception e) {
