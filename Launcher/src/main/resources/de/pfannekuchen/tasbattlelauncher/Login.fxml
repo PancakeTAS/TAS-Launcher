@@ -1,108 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-image: url('/LoginBackground.png'); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pfannekuchen.tasbattlelauncher.TASBattleLauncher">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pfannekuchen.tasbattlelauncher.TASBattleLauncher">
    <children>
-      <Label layoutX="14.0" layoutY="466.0" prefHeight="17.0" prefWidth="303.0" text="Got a Microsoft Account instead? " textFill="#dcfaf0">
-         <font>
-            <Font name="Digital-7 Mono" size="20.0" />
-         </font>
+      <ImageView fitHeight="400.0" fitWidth="600.0" layoutY="-60.0" pickOnBounds="true">
+         <image>
+            <Image url="@background2.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="65.0" layoutY="70.0" prefHeight="217.0" prefWidth="470.0" style="-fx-background-color: #262626; -fx-background-radius: 5;">
          <effect>
-            <InnerShadow height="5.0" radius="2.0" width="5.0">
-               <color>
-                  <Color red="0.046799998730421066" green="0.2673400640487671" blue="0.38999998569488525" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
-      </Label>
-      <Button layoutX="312.0" layoutY="461.0" mnemonicParsing="false" onMouseClicked="#login_microsoft" prefHeight="29.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-radius: 5;" styleClass="label" stylesheets="@hover3.css" text="Microsoft Login" textFill="#5b6f72">
+         <children>
+            <ImageView fx:id="microsoftbtn" fitHeight="106.0" fitWidth="330.0" layoutX="70.0" layoutY="54.0" onMouseClicked="#login_microsoft" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@button_texture_blue1.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="mojangbtn" fitHeight="53.0" fitWidth="330.0" layoutX="69.0" layoutY="121.0" onMouseClicked="#login_mojang" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@button_texture_blue2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="346.0" layoutX="54.0" layoutY="-38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@minecraft.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="errorlabel" alignment="CENTER" layoutX="62.0" layoutY="182.0" prefHeight="25.0" prefWidth="346.0" text="Error: No Error Message" textFill="#a80505" visible="false">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textField" layoutX="84.0" layoutY="45.0" prefHeight="25.0" prefWidth="300.0" promptText="email" style="-fx-background-color: rgba(.2, .2, .2, .2); -fx-text-inner-color: #FFFFFF;" visible="false" />
+            <PasswordField fx:id="passwordField" layoutX="84.0" layoutY="79.0" prefHeight="25.0" prefWidth="300.0" promptText="password" style="-fx-background-color: rgba(.2, .2, .2, .2); -fx-text-inner-color: #FFFFFF;" visible="false" />
+            <ImageView fx:id="signinbtn" fitHeight="53.0" fitWidth="330.0" layoutX="69.0" layoutY="121.0" onMouseClicked="#login_signin" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@button_texture_blue2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutY="326.0" prefHeight="17.0" prefWidth="600.0" text="THIS IS NOT AN OFFICIAL LAUNCHER!">
          <font>
-            <Font name="Candara" size="14.0" />
+            <Font name="Segoe UI Black Italic" size="12.0" />
          </font>
          <effect>
-            <Glow level="1.0">
-               <input>
-                  <Bloom threshold="0.55" />
-               </input>
-            </Glow>
-         </effect>
-      </Button>
-      <TextField fx:id="textField" layoutX="55.0" layoutY="193.0" prefHeight="25.0" prefWidth="390.0" promptText="Enter your Email" style="-fx-background-color: rgba(.2, .2, .2, .2); -fx-text-inner-color: #FFFFFF;">
-         <font>
-            <Font name="Digital-7 Mono" size="15.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="passwordField" layoutX="55.0" layoutY="225.0" prefHeight="25.0" prefWidth="390.0" promptText="Enter Your Password" style="-fx-background-color: rgba(.2, .2, .2, .2); -fx-text-inner-color: #FFFFFF;">
-         <font>
-            <Font name="Digital-7 Mono" size="15.0" />
-         </font>
-      </PasswordField>
-      <Button layoutX="55.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#login_signin" prefHeight="29.0" prefWidth="390.0" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-radius: 5;" styleClass="label" stylesheets="@hover3.css" text="Sign-in " textFill="#9da6a8">
-         <font>
-            <Font name="Candara" size="14.0" />
-         </font>
-         <effect>
-            <Glow level="1.0">
-               <input>
-                  <Bloom threshold="0.55" />
-               </input>
-            </Glow>
-         </effect>
-      </Button>
-      <ProgressIndicator fx:id="indicator" layoutX="222.0" layoutY="401.0" prefHeight="44.0" prefWidth="80.0" visible="false">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <effect>
-            <DropShadow height="126.01" radius="67.325" spread="0.74" width="145.29">
-               <input>
-                  <Glow level="1.0">
-                     <input>
-                        <Bloom threshold="0.0" />
-                     </input>
-                  </Glow>
-               </input>
-               <color>
-                  <Color green="0.19539473950862885" blue="0.43421053886413574" />
-               </color>
-            </DropShadow>
-         </effect>
-      </ProgressIndicator>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="500.0" text="Log into your Mojang Account" textAlignment="CENTER" textFill="#196768">
-         <font>
-            <Font name="Digital-7 Mono" size="30.0" />
-         </font>
-         <effect>
-            <Glow level="1.0">
-               <input>
-                  <DropShadow spread="0.55">
-                     <color>
-                        <Color red="0.06578947603702545" green="0.06578947603702545" blue="0.06578947603702545" />
-                     </color>
-                  </DropShadow>
-               </input>
-            </Glow>
-         </effect>
-      </Label>
-      <Label fx:id="errorlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="321.0" prefHeight="52.0" prefWidth="244.0" text="Error: No Error Message" textAlignment="CENTER" textFill="#a80404" visible="false">
-         <font>
-            <Font name="Candara" size="14.0" />
-         </font>
-         <effect>
-            <Glow level="1.0">
+            <Glow level="0.0">
                <input>
                   <Bloom threshold="0.0" />
                </input>

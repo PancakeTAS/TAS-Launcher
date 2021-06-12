@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,232 +13,151 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('/background.png'); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pfannekuchen.tasbattlelauncher.TASBattleLauncher">
-   <bottom>
-      <BorderPane prefHeight="84.0" prefWidth="1280.0" style="-fx-background-color: rgb(0, 19, 30, 0.5);" BorderPane.alignment="CENTER">
-         <center>
-            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#startClient" prefHeight="56.0" prefWidth="190.0" style="-fx-padding: 0.20em 0.2em; -fx-border-radius: .25em; -fx-border-width: 0.1em; -fx-border-fill: #2a0665;" stylesheets="@hover.css" text="Start Client" textAlignment="CENTER" textFill="#005151" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Segoe UI Semibold" size="28.0" />
-               </font>
-               <effect>
-                  <DropShadow height="24.0" radius="11.5" width="24.0">
-                     <color>
-                        <Color red="0.16470588743686676" green="0.0235294122248888" blue="0.3960784375667572" />
-                     </color>
-                     <input>
-                        <Glow level="0.59">
-                           <input>
-                              <Bloom threshold="0.0" />
-                           </input>
-                        </Glow>
-                     </input>
-                  </DropShadow>
-               </effect>
-            </Label>
-         </center>
-         <left>
-            <HBox prefHeight="60.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css" BorderPane.alignment="CENTER">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#openSettings" prefHeight="87.0" prefWidth="193.0" text="Settings" textAlignment="CENTER" textFill="#40518a">
-                     <font>
-                        <Font name="Digital-7 Mono" size="34.0" />
-                     </font>
-                     <effect>
-                        <Bloom threshold="0.0" />
-                     </effect>
-                  </Label>
-               </children>
-            </HBox>
-         </left>
-      </BorderPane>
-   </bottom>
-   <left>
-      <VBox prefHeight="636.0" prefWidth="193.0" style="-fx-background-color: rgb(0, 19, 30, 0.5);" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pfannekuchen.tasbattlelauncher.TASBattleLauncher">
+   <children>
+      <HBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <HBox prefHeight="60.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css">
+            <VBox prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: #262626;">
                <children>
-                  <Label fx:id="accountlabel" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#openLoginDialog" prefHeight="79.0" prefWidth="193.0" text="Login" textAlignment="CENTER" textFill="#40518a">
-                     <font>
-                        <Font name="Digital-7 Mono" size="22.0" />
-                     </font>
-                     <effect>
-                        <Bloom threshold="0.0" />
-                     </effect>
-                  </Label>
+                  <HBox onMouseClicked="#openLoginDialog" prefHeight="63.0" prefWidth="200.0" styleClass="animate" stylesheets="@hover_animation.css">
+                     <children>
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@profile_icon.png" />
+                           </image>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </ImageView>
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="137.0" text="Login" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="63.0" prefWidth="200.0" styleClass="animate" stylesheets="@hover_animation.css">
+                     <children>
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@tas_icon.png" />
+                           </image>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="137.0" text="MINECRAFT:          TAS" textFill="#c6c6c6" wrapText="true">
+                           <font>
+                              <Font name="Segoe UI Black" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="63.0" prefWidth="200.0" styleClass="animate" stylesheets="@hover_animation.css">
+                     <children>
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@tasbattle_icon.png" />
+                           </image>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="137.0" text="MINECRAFT:          TAS Battle" textFill="#c6c6c6" wrapText="true">
+                           <font>
+                              <Font name="Segoe UI Black" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children></VBox>
+            <VBox prefHeight="720.0" prefWidth="1080.0">
+               <children>
+                  <AnchorPane prefHeight="41.0" prefWidth="1080.0" style="-fx-background-color: #262626;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="23.0" prefHeight="17.0" prefWidth="180.0" text="TAS BATTLE: BEDWARS" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Black" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="7.0" layoutY="45.0" prefHeight="26.0" prefWidth="82.0" styleClass="animate" stylesheets="@hover_text.css" text="Play" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Black" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="89.0" layoutY="44.0" prefHeight="26.0" prefWidth="82.0" styleClass="animate" stylesheets="@hover_text.css" text="Installations" textFill="#dadada">
+                           <font>
+                              <Font name="Segoe UI" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="193.0" layoutY="44.0" prefHeight="26.0" prefWidth="82.0" styleClass="animate" stylesheets="@hover_text.css" text="Patch notes" textFill="#dadada">
+                           <font>
+                              <Font name="Segoe UI" size="14.0" />
+                           </font>
+                        </Label>
+                        <Line endX="-83.0" fill="#008542" layoutX="140.0" layoutY="77.0" smooth="false" startX="-100.0" stroke="#008542" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="3.0" translateY="1.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></AnchorPane>
+                  <ScrollPane focusTraversable="false" hbarPolicy="NEVER" prefHeight="640.0" prefWidth="1080.0" style="-fx-faint-focus-color: #262626; -fx-focus-color: #262626; -fx-background-color: #262626;" vbarPolicy="NEVER">
+                     <content>
+                        <AnchorPane prefHeight="942.0" prefWidth="1080.0">
+                           <children>
+                              <ImageView fitHeight="423.0" fitWidth="1080.0">
+                                 <image>
+                                    <Image url="@background.jpg" />
+                                 </image>
+                              </ImageView>
+                              <BorderPane layoutY="423.0" prefHeight="70.0" prefWidth="1080.0" style="-fx-background-color: #262626;">
+                                 <left>
+                                    <ComboBox fx:id="gamemodes" prefHeight="56.0" prefWidth="180.0" promptText="FFA 1.12.2" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER">
+                                    </ComboBox>
+                                 </left></BorderPane>
+                              <AnchorPane layoutY="493.0" prefHeight="449.0" prefWidth="1080.0" style="-fx-background-color: #333333;">
+                                 <effect>
+                                    <InnerShadow height="32.75" radius="7.6875" width="0.0" />
+                                 </effect>
+                              </AnchorPane>
+                              <ImageView fitHeight="80.0" fitWidth="276.0" layoutX="389.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@button_texture.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
-            </HBox>
-            <BorderPane prefHeight="574.0" prefWidth="193.0">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets top="40.0" />
-               </padding>
-               <top>
-                  <Label contentDisplay="CENTER" prefHeight="73.0" prefWidth="183.0" text="Gamemodes:" textFill="#40518a" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Digital-7 Mono" size="34.0" />
-                     </font>
-                     <effect>
-                        <Bloom threshold="0.0" />
-                     </effect>
-                  </Label>
-               </top>
-               <center>
-                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <HBox onMouseClicked="#selectBedwars" prefHeight="31.0" prefWidth="193.0" style="-fx-border-color: rgb(0, 19, 29, .3); -fx-border-width: 5px;" styleClass="hbox" stylesheets="@hover2.css">
-                           <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Bedwars.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="7.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSkywars" prefHeight="79.0" prefWidth="193.0" text="Bedwars" textAlignment="CENTER" textFill="#884bd6">
-                                 <font>
-                                    <Font name="Digital-7 Mono" size="28.0" />
-                                 </font>
-                                 <effect>
-                                    <Bloom threshold="0.0" />
-                                 </effect>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="31.0" prefWidth="193.0" styleClass="hbox" stylesheets="@hover2.css">
-                           <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Skywars.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="7.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="193.0" text="Skywars" textAlignment="CENTER" textFill="#40518a">
-                                 <font>
-                                    <Font name="Digital-7 Mono" size="28.0" />
-                                 </font>
-                                 <effect>
-                                    <Bloom threshold="0.0" />
-                                 </effect>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </center>
-            </BorderPane>
+            </VBox>
          </children>
-      </VBox>
-   </left>
-   <center>
-      <TabPane focusTraversable="false" prefHeight="200.0" prefWidth="200.0" styleClass="tabpane" stylesheets="@tabs.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab closable="false" text="Info">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-               </content></Tab>
-          <Tab closable="false" text="Leaderboard">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <Label alignment="CENTER" layoutX="706.0" layoutY="47.0" prefHeight="120.0" prefWidth="289.0" text="Your Rank: #1" textAlignment="CENTER" textFill="#2970c6" wrapText="true">
-                           <font>
-                              <Font name="Digital-7 Mono" size="47.0" />
-                           </font>
-                           <effect>
-                              <Glow level="0.32">
-                                 <input>
-                                    <Bloom threshold="0.0" />
-                                 </input>
-                              </Glow>
-                           </effect>
-                        </Label>
-                        <TextArea layoutX="664.0" layoutY="185.0" prefHeight="356.0" prefWidth="373.0" style="-fx-text-fill: #005151;" stylesheets="@textarea.css" text="Final Kills: 55&#10;Kills: 56&#10;Final Deaths: 245&#10;Deaths: 24&#10;&#10;KDR: 420&#10;FKDR:  99.213213123&#10;&#10;Wins: 51&#10;Losses: 555&#10;Win Chance: 99%&#10;&#10;Beds broken: 44">
-                           <font>
-                              <Font name="LCDMono2 Bold" size="18.0" />
-                           </font>
-                           <effect>
-                              <DropShadow>
-                                 <input>
-                                    <Glow level="1.0" />
-                                 </input>
-                                 <color>
-                                    <Color red="0.5218912363052368" green="0.2077241688966751" blue="0.8157894611358643" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </TextArea>
-                        <TextArea layoutX="14.0" layoutY="133.0" prefHeight="440.0" prefWidth="607.0" style="-fx-text-fill: #005151;" stylesheets="@textarea.css" text="#1 Pancake&#10;#2 Pancake&#10;#3 Pancake&#10;#4 Pancake&#10;#5 Pancake&#10;#6 Pancake&#10;#7 Pancake&#10;#8 Pancake&#10;#9 Pancake&#10;#10 Pancake&#10;#11 Pancake&#10;#12 Pancake&#10;#13 Pancake&#10;#14 Pancake&#10;#15 Pancake">
-                           <font>
-                              <Font name="LCDMono2 Light" size="18.0" />
-                           </font>
-                           <effect>
-                              <Glow level="0.68">
-                                 <input>
-                                    <Bloom threshold="0.0">
-                                       <input>
-                                          <InnerShadow height="5.0" radius="2.0" width="5.0" />
-                                       </input>
-                                    </Bloom>
-                                 </input>
-                              </Glow>
-                           </effect>
-                        </TextArea>
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="120.0" prefWidth="607.0" text="Top Players" textAlignment="CENTER" textFill="#2970c6" wrapText="true">
-                           <font>
-                              <Font name="Digital-7 Mono" size="43.0" />
-                           </font>
-                           <effect>
-                              <Glow level="0.32">
-                                 <input>
-                                    <Bloom threshold="0.0" />
-                                 </input>
-                              </Glow>
-                           </effect>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content></Tab>
-            <Tab closable="false" text="Changelog">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <TextArea editable="false" layoutX="14.0" layoutY="97.0" prefHeight="491.0" prefWidth="1049.0" style="-fx-text-fill: #884bd6;" stylesheets="@textarea.css" text="- This is a Demo Changelog You probably already know that Bedwars doesn't exist yet&#10;- 69 different Teams&#10;- 420 Beds&#10;">
-                           <font>
-                              <Font name="Dungeon" size="18.0" />
-                           </font>
-                           <effect>
-                              <Glow level="0.29">
-                                 <input>
-                                    <Bloom threshold="0.0" />
-                                 </input>
-                              </Glow>
-                           </effect>
-                        </TextArea>
-                        <Label layoutX="14.0" layoutY="14.0" prefHeight="83.0" prefWidth="1045.0" text="Bedwars Release v1.0" textFill="#971313">
-                           <font>
-                              <Font name="Digital-7 Mono" size="34.0" />
-                           </font>
-                           <effect>
-                              <Glow level="1.0">
-                                 <input>
-                                    <Bloom threshold="0.0" />
-                                 </input>
-                              </Glow>
-                           </effect>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content></Tab>
-        </tabs>
-      </TabPane>
-   </center>
-</BorderPane>
+      </HBox>
+   </children>
+</AnchorPane>

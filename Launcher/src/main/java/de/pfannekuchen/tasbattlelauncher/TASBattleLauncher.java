@@ -15,10 +15,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,7 +53,7 @@ public class TASBattleLauncher extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(loader.load()));
 		stage.show();
-		accountlabel = (Label) ((HBox) ((VBox) ((BorderPane) stage.getScene().getRoot()).getLeft()).getChildren().get(0)).getChildren().get(0);
+		accountlabel = (Label) ((HBox) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(0)).getChildren().get(0)).getChildren().get(1);
 		/* Thread for Loading an Account from the Accounts File */
 		Thread accountLoader = new Thread(new Runnable() {
 			
@@ -97,6 +101,8 @@ public class TASBattleLauncher extends Application {
 		accountLoader.setName("Account-Loader Thread");
 		accountLoader.setDaemon(true);
 		accountLoader.start();
+		/* Load All Available Game Modes into the List */
+		((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("FFA 1.12.2", "FFA 1.16.5", "FFA 1.8.9", "Bedwars 1.8.9", "Bedwars 1.12.2", "Bedwars 1.16.5", "Skywars 1.8.9", "Skywars 1.12.2", "Skywars 1.16.5", "Cores 1.12.2", "Cores 1.8.9", "Cores 1.16.5");
 	}
 	
 	/**
@@ -108,32 +114,7 @@ public class TASBattleLauncher extends Application {
 	}
 	
 	/**
-	 * Automatically called by the Gui once you click on "Settings"
-	 * TODO: Open Settings Menu here
-	 */
-	@FXML private void openSettings() {
-		
-	}
-
-	/**
-	 * Automatically called by the Gui once you click on "Bedwars"
-	 * TODO: Fetch Bedwars Information and Display Pane
-	 */
-	@FXML private void selectBedwars() {
-		
-	}
-	
-	/**
-	 * Automatically called by the Gui once you click on "Skywars"
-	 * TODO: Fetch Skywars Information and Display Pane
-	 */
-	@FXML private void selectSkywars() {
-		
-	}
-	
-	/**
 	 * Automatically called by the Gui once you click on "Login"
-	 * TODO: Show a Pop-up where you can log into Microsoft or Mojang Account
 	 */
 	@FXML private void openLoginDialog() throws IOException {
 		loginStage = new Stage();
@@ -142,17 +123,30 @@ public class TASBattleLauncher extends Application {
 	}
 	
 	private static Stage loginStage;
-	@FXML private ProgressIndicator indicator;
+	@FXML private ImageView microsoftbtn;
+	@FXML private ImageView mojangbtn;
+	@FXML private ImageView signinbtn;
 	@FXML private Label errorlabel;
 	@FXML private TextField textField;
 	@FXML private PasswordField passwordField;
 	
 	/**
+	 * Automatically called by the Gui once you click on "Mojang Account" in the Login Dialog Pane
+	 */
+	@FXML
+	private void login_mojang() {
+		textField.setVisible(true);
+		passwordField.setVisible(true);
+		microsoftbtn.setVisible(false);
+		mojangbtn.setVisible(false);
+		errorlabel.setVisible(false);
+		signinbtn.setVisible(true);
+	}
+	
+	/**
 	 * Automatically called by the Gui once you click on "Sign-in" in the Login Dialog Pane
-	 * TODO: Sign into the Mojang Account
 	 */
 	@FXML private void login_signin() {
-		indicator.setVisible(true);
 		Thread login_thread = new Thread(() -> {
 			try {
 				MojangAccount account = new MojangAccount(textField.getText(), passwordField.getText());
@@ -175,7 +169,6 @@ public class TASBattleLauncher extends Application {
 				});
 				e.printStackTrace();
 			}
-			indicator.setVisible(false);
 		});
 		login_thread.setDaemon(true);
 		login_thread.setName("Login Thread");
@@ -184,10 +177,8 @@ public class TASBattleLauncher extends Application {
 	
 	/**
 	 * Automatically called by the Gui once you click on "Microsoft Login" in the Login Dialog Pane
-	 * TODO: Sign into the Microsoft Account
 	 */
 	@FXML private void login_microsoft() {
-		indicator.setVisible(true);
 		Thread login_thread = new Thread(() -> {
 			try {
 				MicrosoftAccount account = new MicrosoftAccount();
@@ -210,7 +201,6 @@ public class TASBattleLauncher extends Application {
 				});
 				e.printStackTrace();
 			}
-			indicator.setVisible(false);
 		});
 		login_thread.setDaemon(true);
 		login_thread.setName("Login Thread");
