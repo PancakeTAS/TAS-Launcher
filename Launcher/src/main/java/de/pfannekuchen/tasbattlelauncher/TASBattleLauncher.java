@@ -12,11 +12,13 @@ import de.pfannekuchen.accountapi.MicrosoftAccount;
 import de.pfannekuchen.accountapi.MojangAccount;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
@@ -37,6 +39,7 @@ public class TASBattleLauncher extends Application {
 	public static final File accountsFile = new File("accounts");
 	public static Object mcaccount;
 	private static Label accountlabel;
+	private static Stage stage;
 	
 	/**
 	 * You cannot start JavaFX from the Class itself, so here is a static method to do that
@@ -48,12 +51,15 @@ public class TASBattleLauncher extends Application {
 	/**
 	 * Main of Gui
 	 */
-	@Override public void start(Stage stage) throws Exception {
+	@Override @SuppressWarnings("unchecked") public void start(Stage stage) throws Exception {
 		/* Load FXML File and display it */
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(loader.load()));
 		stage.show();
+		TASBattleLauncher.stage = stage;
 		accountlabel = (Label) ((HBox) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(0)).getChildren().get(0)).getChildren().get(1);
+		/* Load the Configuration File */
+		ConfigUtils.init(new File("launcher.properties"));
 		/* Thread for Loading an Account from the Accounts File */
 		Thread accountLoader = new Thread(new Runnable() {
 			
@@ -98,12 +104,25 @@ public class TASBattleLauncher extends Application {
 				}
 			}
 		});
+				
 		accountLoader.setName("Account-Loader Thread");
 		accountLoader.setDaemon(true);
 		accountLoader.start();
 		/* Load All Available Game Modes into the List */
-		((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("FFA 1.12.2", "FFA 1.16.5", "FFA 1.8.9", "Bedwars 1.8.9", "Bedwars 1.12.2", "Bedwars 1.16.5", "Skywars 1.8.9", "Skywars 1.12.2", "Skywars 1.16.5", "Cores 1.12.2", "Cores 1.8.9", "Cores 1.16.5");
+		((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("FabricTAS 1.16.1", "LoTAS 1.12.2", "LoTAS 1.11.2", "LoTAS 1.9.4", "LoTAS 1.8.9", "TASTools 1.7.10");
+		// Not released yet
+		//((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("TASmod 1.12.2", "TASmod-OG 1.0");
+		//((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(2)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("FFA 1.12.2", "FFA 1.16.5", "FFA 1.8.9", "Bedwars 1.8.9", "Bedwars 1.12.2", "Bedwars 1.16.5", "Skywars 1.8.9", "Skywars 1.12.2", "Skywars 1.16.5", "Cores 1.12.2", "Cores 1.8.9", "Cores 1.16.5");
+		((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(3)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("TASTickrateChanger 1.16.5", "TASTickrateChanger 1.15.2", "TASTickrateChanger 1.14.4", "TASTickrateChanger 1.12.2", "TickrateChanger 1.12.2", "TASTools 1.12.2", "TASTools 1.11.2", "TASTools 1.10.2", "TASTools 1.9.4", "TASTools 1.8.9", "TASmod-OG 1.0", "TASmod 1.12.2");
+	
+		// Show "TAS Old/Beta" only when "Show Experimental" is enabled
+		Platform.runLater(() -> {
+			if (!ConfigUtils.getBoolean("root", "showexperimental")) ((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(4).setVisible(false);
+			((CheckBox) ((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(5)).setSelected(ConfigUtils.getBoolean("root", "showexperimental"));
+		});
 	}
+	
+	/* ================================== Events for Right Side of Main Menu Pane ================================== */
 	
 	/**
 	 * Automatically called by the Gui once you click on "Start Client"
@@ -114,13 +133,54 @@ public class TASBattleLauncher extends Application {
 	}
 	
 	/**
-	 * Automatically called by the Gui once you click on "Login"
+	 * Automatically called by the Gui once a new Gamemode has been selected in the Drop Down Menu
+	 * TODO: Update the Pane and request new Information from the Server
+	 */
+	@FXML private void switchGamemode() {
+
+	}
+	
+	/* ================================== Events for Left Side of Main Menu Pane ================================== */
+	
+	/* Following Methods are automatically being called from the System whenever they select a new Category on the left. */
+	/* Clicking them will show the correct menu */
+	@FXML private HBox tas;
+	@FXML private HBox tasplayback;
+	@FXML private HBox tasbattle;
+	@FXML private HBox tasoldbeta;
+	@FXML private CheckBox experimentalCheckbox;
+	
+	@FXML private void openTASMenu()  { tas.getStyleClass().set(1, "selected"); tasplayback.getStyleClass().set(1, null); tasbattle.getStyleClass().set(1, null); tasoldbeta.getStyleClass().set(1, null); showPane(0); }
+	@FXML private void openTASPlaybackMenu()  { tas.getStyleClass().set(1, null); tasplayback.getStyleClass().set(1, "selected"); tasbattle.getStyleClass().set(1, null); tasoldbeta.getStyleClass().set(1, null); showPane(1); }
+	@FXML private void openTASBattleMenu()  { tas.getStyleClass().set(1, null); tasplayback.getStyleClass().set(1, null); tasbattle.getStyleClass().set(1, "selected"); tasoldbeta.getStyleClass().set(1, null); showPane(2); }
+	@FXML private void openTASOldBetaMenu()  { tas.getStyleClass().set(1, null); tasplayback.getStyleClass().set(1, null); tasbattle.getStyleClass().set(1, null); tasoldbeta.getStyleClass().set(1, "selected"); showPane(3); }
+	
+	@FXML private void toggleExperimental() {
+		ConfigUtils.setBoolean("root", "showexperimental", experimentalCheckbox.isSelected());
+		ConfigUtils.save();
+		((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(4).setVisible(ConfigUtils.getBoolean("root", "showexperimental"));
+		openTASMenu();
+	}
+	
+	/**
+	 * This Method is not automatically being called! 
+	 * This Hides all Panes but keeps the indexed one
+	 */
+	public void showPane(int index) {
+		ObservableList<Node> items = ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren();
+		for (int i = 0; i < items.size(); i++)  items.get(i).setVisible(i == index);
+	}
+	
+	/**
+	 * Automatically called by the Gui once you click on "Login". Opens a menu where you can easily Log Into your Account
 	 */
 	@FXML private void openLoginDialog() throws IOException {
 		loginStage = new Stage();
 		loginStage.setScene(new Scene(new FXMLLoader(getClass().getResource("Login.fxml")).load()));
 		loginStage.show();
 	}
+	
+	/* ================================== Events for Login Pane ================================== */
 	
 	private static Stage loginStage;
 	@FXML private ImageView microsoftbtn;

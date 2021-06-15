@@ -1,3 +1,7 @@
 .animate:hover {
 	-fx-background-color: #3c3c3c;
 }
+
+.selected {
+    -fx-background-color: #3c3c3c;
+}
