@@ -64,6 +64,13 @@ public class TASLauncher extends Application {
 		accountlabel = (Label) ((HBox) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(0)).getChildren().get(0)).getChildren().get(1);
 		/* Load the Configuration File */
 		ConfigUtils.init(new File(System.getProperty("user.home") + "/launcher.properties"));
+		/* Load Launcher Data */
+		WebReader.readMainPage();
+		for (String s : WebReader.LOTAS_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
+		for (String s : WebReader.PLAYBACK_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
+		for (String s : WebReader.TASBATTLE_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(2)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
+		for (String s : WebReader.UNSUP_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(3)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
+		
 		/* Thread for Loading an Account from the Accounts File */
 		Thread accountLoader = new Thread(new Runnable() {
 			
@@ -108,18 +115,9 @@ public class TASLauncher extends Application {
 				}
 			}
 		});
-				
 		accountLoader.setName("Account-Loader Thread");
 		accountLoader.setDaemon(true);
 		accountLoader.start();
-		/* Load All Available Game Modes into the List.
-		 * TODO: Load this from the Server instead */
-		((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("FabricTAS 1.16.1", "LoTAS 1.12.2", "LoTAS 1.11.2", "LoTAS 1.9.4", "LoTAS 1.8.9", "TASTools 1.7.10");
-		// Not released yet
-		//((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("TASmod 1.12.2", "TASmod-OG 1.0");
-		//((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(2)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("FFA 1.12.2", "FFA 1.16.5", "FFA 1.8.9", "Bedwars 1.8.9", "Bedwars 1.12.2", "Bedwars 1.16.5", "Skywars 1.8.9", "Skywars 1.12.2", "Skywars 1.16.5", "Cores 1.12.2", "Cores 1.8.9", "Cores 1.16.5");
-		((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(3)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().addAll("TASTickrateChanger 1.16.5", "TASTickrateChanger 1.15.2", "TASTickrateChanger 1.14.4", "TASTickrateChanger 1.12.2", "TickrateChanger 1.12.2", "TASTools 1.12.2", "TASTools 1.11.2", "TASTools 1.10.2", "TASTools 1.9.4", "TASTools 1.8.9", "TASmod-OG 1.0", "TASmod 1.12.2", "LoTAS 1.14.4", "LoTAS 1.15.2");
-	
 		// Show "TAS Old/Beta" only when "Show Experimental" is enabled
 		Platform.runLater(() -> {
 			if (!ConfigUtils.getBoolean("root", "showexperimental")) ((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(4).setVisible(false);
