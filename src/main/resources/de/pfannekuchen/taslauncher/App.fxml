@@ -52,18 +52,18 @@
                   </HBox>
                   <HBox fx:id="tas" onMouseClicked="#openTASMenu" prefHeight="63.0" prefWidth="200.0" stylesheets="@hover_animation.css">
                      <children>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                            <image>
-                              <Image url="@tas_icon.png" />
+                              <Image url="@lotas_icon.png" />
                            </image>
                            <effect>
                               <DropShadow />
                            </effect>
                         </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="137.0" text="MINECRAFT:          TAS" textFill="#c6c6c6" wrapText="true">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="137.0" text="MINECRAFT:          LoTAS" textFill="#c6c6c6" wrapText="true">
                            <font>
                               <Font name="Segoe UI Black" size="13.0" />
                            </font>
@@ -79,12 +79,12 @@
                   </HBox>
                   <HBox fx:id="tasplayback" onMouseClicked="#openTASPlaybackMenu" prefHeight="63.0" prefWidth="200.0" stylesheets="@hover_animation.css">
                      <children>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                            <image>
-                              <Image url="@tasreplay_icon.png" />
+                              <Image url="@tas_icon.png" />
                            </image>
                            <effect>
                               <DropShadow />
@@ -106,7 +106,7 @@
                   </HBox>
                   <HBox fx:id="tasbattle" onMouseClicked="#openTASBattleMenu" prefHeight="63.0" prefWidth="200.0" stylesheets="@hover_animation.css">
                      <children>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
@@ -133,7 +133,7 @@
                   </HBox>
                   <HBox fx:id="tasoldbeta" onMouseClicked="#openTASOldBetaMenu" prefHeight="63.0" prefWidth="200.0" stylesheets="@hover_animation.css">
                      <children>
-                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
@@ -158,7 +158,7 @@
                         <String fx:value="null" />
                      </styleClass>
                   </HBox>
-                  <CheckBox fx:id="experimentalCheckbox" mnemonicParsing="false" onAction="#toggleExperimental" prefHeight="17.0" prefWidth="197.0" stylesheets="@checkbox_style.css" text="Show Experimental Categories" textFill="#dadada">
+                  <CheckBox fx:id="experimentalCheckbox" focusTraversable="false" mnemonicParsing="false" onAction="#toggleExperimental" prefHeight="17.0" prefWidth="197.0" style="-fx-faint-focus-color: transparent; -fx-focus-color: transparent;" stylesheets="@checkbox_style.css" text="Show Experimental Categories" textFill="#dadada">
                      <VBox.margin>
                         <Insets left="10.0" top="330.0" />
                      </VBox.margin>
