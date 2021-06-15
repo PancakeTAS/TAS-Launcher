@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  */
 public class TASLauncher extends Application {
 
-	public static final File accountsFile = new File("accounts");
+	public static final File accountsFile = new File(System.getProperty("user.home") + "/accounts");
 	public static Object mcaccount;
 	private static Label accountlabel;
 	private static Stage stage;
@@ -63,7 +63,7 @@ public class TASLauncher extends Application {
 		TASLauncher.stage = stage;
 		accountlabel = (Label) ((HBox) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(0)).getChildren().get(0)).getChildren().get(1);
 		/* Load the Configuration File */
-		ConfigUtils.init(new File("launcher.properties"));
+		ConfigUtils.init(new File(System.getProperty("user.home") + "/launcher.properties"));
 		/* Thread for Loading an Account from the Accounts File */
 		Thread accountLoader = new Thread(new Runnable() {
 			

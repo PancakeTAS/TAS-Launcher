@@ -29,10 +29,15 @@ jlink {
     addExtraDependencies("javafx")
 	jpackage {
 		imageName = "TAS Launcher"
-		// Windows-Only Options
-		//installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients']
-		installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--win-menu', '--win-dir-chooser', '--win-shortcut']
-	}
+		imageOptions = ['--icon', 'src/main/resources/de/pfannekuchen/taslauncher/tas_icon.ico']
+		// Windows|Linux Only Options
+		//installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--linux-package-name', 'taslauncher', '--linux-deb-maintainer', 'gamesupport@mgnet.work', '--linux-app-release', '1.0.0.0', '--linux-app-category', 'games', '--linux-shortcut', '--type', 'rpm'] // Linux
+		//installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--linux-package-name', 'taslauncher', '--linux-deb-maintainer', 'gamesupport@mgnet.work', '--linux-app-release', '1.0.0.0', '--linux-app-category', 'games', '--linux-shortcut', '--type', 'deb'] // Linux
+		//installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--mac-package-name', 'TAS Launcher', '--type', 'pkg'] // Linux
+		//installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--mac-package-name', 'TAS Launcher', '--type', 'dmg'] // Linux		
+		installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--win-menu', '--win-dir-chooser', '--win-shortcut', '--type', 'msi'] // Windows
+		//installerOptions =  ['--vendor', 'MGNetwork', '--verbose', '--description', 'Launcher for TAS Clients', '--win-menu', '--win-dir-chooser', '--win-shortcut', '--type', 'exe'] // Windows
+ 	}
 }
 
 repositories {
@@ -54,5 +59,4 @@ tasks.getByName("build").group = "tas"
 tasks.getByName("jar").group = "tas"
 tasks.getByName("run").group = "tas"
 tasks.getByName("javadoc").group = "tas"
-tasks.getByName("eclipse").group = "tas"
 tasks.getByName("jpackage").group = "tas"
