@@ -1,1 +1,1 @@
-TAS Battle launcher
+TAS Launcher

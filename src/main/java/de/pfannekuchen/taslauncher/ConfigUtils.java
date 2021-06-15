@@ -1,4 +1,4 @@
-package de.pfannekuchen.tasbattlelauncher;
+package de.pfannekuchen.taslauncher;
 
 import java.io.File;
 import java.io.FileReader;
@@ -38,7 +38,7 @@ public class ConfigUtils {
     public static void save() {
         try {
             FileWriter writer = new FileWriter(configuration);
-            props.store(writer, "TAS Battle Launcher Configuration File");
+            props.store(writer, "TAS Launcher Configuration File");
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();

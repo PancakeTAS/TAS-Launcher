@@ -1,4 +1,4 @@
-package de.pfannekuchen.tasbattlelauncher;
+package de.pfannekuchen.taslauncher;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,10 +31,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Entry Point for the TAS Battle Launcher (JavaFX Application)
+ * Entry Point for the TAS Launcher (JavaFX Application)
  * @author Pancake
  */
-public class TASBattleLauncher extends Application {
+public class TASLauncher extends Application {
 
 	public static final File accountsFile = new File("accounts");
 	public static Object mcaccount;
@@ -56,7 +56,7 @@ public class TASBattleLauncher extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(loader.load()));
 		stage.show();
-		TASBattleLauncher.stage = stage;
+		TASLauncher.stage = stage;
 		accountlabel = (Label) ((HBox) ((VBox) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(0)).getChildren().get(0)).getChildren().get(1);
 		/* Load the Configuration File */
 		ConfigUtils.init(new File("launcher.properties"));
@@ -210,7 +210,7 @@ public class TASBattleLauncher extends Application {
 		Thread login_thread = new Thread(() -> {
 			try {
 				MojangAccount account = new MojangAccount(textField.getText(), passwordField.getText());
-				TASBattleLauncher.mcaccount = account;
+				TASLauncher.mcaccount = account;
 				/* Write Account to File */
 				PrintWriter writer = new PrintWriter(new FileOutputStream(accountsFile, false));
 				writer.println("Mojang Access Token");
@@ -243,7 +243,7 @@ public class TASBattleLauncher extends Application {
 			try {
 				MicrosoftAccount account = new MicrosoftAccount();
 				if (!account.ownsMinecraft()) throw new Exception("Account does not own the Game");
-				TASBattleLauncher.mcaccount = account;
+				TASLauncher.mcaccount = account;
 				/* Write Account to File */
 				PrintWriter writer = new PrintWriter(new FileOutputStream(accountsFile, false));
 				writer.println("Microsoft Token");
