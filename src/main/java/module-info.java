@@ -3,6 +3,7 @@ module TASLauncher {
 	requires transitive javafx.controls;
 	requires transitive javafx.fxml;
 	requires transitive AccountAPI;
+	requires transitive javafx.base;
 	opens de.pfannekuchen.taslauncher to javafx.fxml;
 	exports de.pfannekuchen.taslauncher;
 }

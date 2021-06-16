@@ -13,7 +13,6 @@ import de.pfannekuchen.accountapi.MojangAccount;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -73,6 +72,7 @@ public class TASLauncher extends Application {
 			WebReader.readPages();
 		} catch (Exception e) {
 			offlineMode = true;
+			if (offlineMode) System.err.println("Launcher started in Offline Mode");
 			e.printStackTrace();
 		}
 		for (String s : WebReader.LOTAS_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
@@ -129,7 +129,7 @@ public class TASLauncher extends Application {
 		});
 		accountLoader.setName("Account-Loader Thread");
 		accountLoader.setDaemon(true);
-		accountLoader.start();
+		if (!offlineMode) accountLoader.start();
 		// Show "TAS Old/Beta" only when "Show Experimental" is enabled
 		Platform.runLater(() -> {
 			if (!ConfigUtils.getBoolean("root", "showexperimental")) ((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(4).setVisible(false);

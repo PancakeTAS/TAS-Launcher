@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
+
 public class WebReader {
 
 	public static final int version = 1;
@@ -18,6 +20,11 @@ public class WebReader {
 	public static String[] PLAYBACK_CAT;
 	public static String[] TASBATTLE_CAT;
 	public static String[] UNSUP_CAT;
+	
+	public static Pair<?, ?>[] LOTAS_PATCH;
+	public static Pair<?, ?>[] PLAYBACK_PATCH;
+	public static Pair<?, ?>[] TASBATTLE_PATCH;
+	public static Pair<?, ?>[] UNSUP_PATCH;
 	
 	public static String LOTAS;
 	public static String PLAYBACK;
@@ -69,6 +76,7 @@ public class WebReader {
 		for (int i = 0; i < gameCount; i++) {
 			UNSUP_CAT[i] = lines.poll();
 		}
+		reader.close();
 	}
 
 	/**
@@ -79,6 +87,15 @@ public class WebReader {
 		
 	}
 
+	private static Pair<?, ?>[] readSubpage(Pair<?, ?>[] target, String[] source) throws MalformedURLException, IOException {
+		target = new Pair<?, ?>[source.length];
+		for (int i = 0; i < source.length; i++) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/tasbattlelauncher/" + source[i].split(":")[1]).openStream()));
+			target[i] = new Pair<String, String>(reader.readLine() + ";" + reader.readLine(), reader.lines().collect(Collectors.joining("\n")));
+		}
+		return target;
+	}
+	
 	public static void readPages() throws MalformedURLException, IOException {
 		InputStream stream = new URL("http://mgnet.work/tasbattlelauncher/lotas.dat").openStream();
 		LOTAS = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
@@ -88,6 +105,14 @@ public class WebReader {
 		TASBATTLE = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
 		stream = new URL("http://mgnet.work/tasbattlelauncher/experimental.dat").openStream();
 		UNSUPPORTED = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		
+		WebReader.LOTAS_PATCH = WebReader.readSubpage(WebReader.LOTAS_PATCH, WebReader.LOTAS_CAT);
+		WebReader.PLAYBACK_PATCH = WebReader.readSubpage(WebReader.PLAYBACK_PATCH, WebReader.PLAYBACK_CAT);
+		WebReader.TASBATTLE_PATCH = WebReader.readSubpage(WebReader.TASBATTLE_PATCH, WebReader.TASBATTLE_CAT);
+		WebReader.UNSUP_PATCH = WebReader.readSubpage(WebReader.UNSUP_PATCH, WebReader.UNSUP_CAT);
+		for (int i = 0; i < LOTAS_PATCH.length; i++) {
+			LOTAS += "\n\n\n\n =================================================== " + ((String) LOTAS_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) LOTAS_PATCH[i].getValue());
+		}
 	}
 	
 }
