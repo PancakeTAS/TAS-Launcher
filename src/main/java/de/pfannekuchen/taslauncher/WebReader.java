@@ -2,10 +2,14 @@ package de.pfannekuchen.taslauncher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class WebReader {
 
@@ -15,6 +19,10 @@ public class WebReader {
 	public static String[] TASBATTLE_CAT;
 	public static String[] UNSUP_CAT;
 	
+	public static String LOTAS;
+	public static String PLAYBACK;
+	public static String TASBATTLE;
+	public static String UNSUPPORTED;
 	
 	/**
 	 * Loads the File from the Server and Loads all kinds of Data off it.
@@ -69,6 +77,17 @@ public class WebReader {
 	 */
 	private static void update(URL url) {
 		
+	}
+
+	public static void readPages() throws MalformedURLException, IOException {
+		InputStream stream = new URL("http://mgnet.work/tasbattlelauncher/lotas.dat").openStream();
+		LOTAS = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		stream = new URL("http://mgnet.work/tasbattlelauncher/playback.dat").openStream();
+		PLAYBACK = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		stream = new URL("http://mgnet.work/tasbattlelauncher/tasbattle.dat").openStream();
+		TASBATTLE = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		stream = new URL("http://mgnet.work/tasbattlelauncher/experimental.dat").openStream();
+		UNSUPPORTED = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
 	}
 	
 }

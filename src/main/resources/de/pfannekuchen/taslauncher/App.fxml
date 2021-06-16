@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -215,6 +216,13 @@
                                        <effect>
                                           <InnerShadow height="32.75" radius="7.6875" width="0.0" />
                                        </effect>
+                                       <children>
+                                          <TextArea fx:id="lotasInfo" editable="false" focusTraversable="false" prefHeight="450.0" prefWidth="1080.0" style="-fx-background-color: transparent;" stylesheets="@textfield_style.css" text="They said, that having no Internet Connection is not good :(">
+                                             <font>
+                                                <Font name="Segoe UI" size="12.0" />
+                                             </font>
+                                          </TextArea>
+                                       </children>
                                     </AnchorPane>
                                     <ImageView fitHeight="80.0" fitWidth="276.0" layoutX="389.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -287,6 +295,13 @@
                                        <effect>
                                           <InnerShadow height="32.75" radius="7.6875" width="0.0" />
                                        </effect>
+                                       <children>
+                                          <TextArea fx:id="replayInfo" editable="false" focusTraversable="false" prefHeight="450.0" prefWidth="1080.0" promptText="They said, that having no Internet Connection is not good :(" style="-fx-background-color: transparent;" stylesheets="@textfield_style.css">
+                                             <font>
+                                                <Font name="Segoe UI" size="12.0" />
+                                             </font>
+                                          </TextArea>
+                                       </children>
                                     </AnchorPane>
                                     <ImageView disable="true" fitHeight="80.0" fitWidth="276.0" layoutX="389.0" layoutY="405.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -359,8 +374,15 @@
                                        <effect>
                                           <InnerShadow height="32.75" radius="7.6875" width="0.0" />
                                        </effect>
+                                       <children>
+                                          <TextArea fx:id="battleInfo" editable="false" focusTraversable="false" prefHeight="450.0" prefWidth="1080.0" promptText="They said, that having no Internet Connection is not good :(" style="-fx-background-color: transparent;" stylesheets="@textfield_style.css">
+                                             <font>
+                                                <Font name="Segoe UI" size="12.0" />
+                                             </font>
+                                          </TextArea>
+                                       </children>
                                     </AnchorPane>
-                                    <ImageView fitHeight="80.0" fitWidth="276.0" layoutX="389.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView disable="true" fitHeight="80.0" fitWidth="276.0" layoutX="389.0" layoutY="405.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@button_texture.png" />
                                        </image>
@@ -422,6 +444,13 @@
                                        <effect>
                                           <InnerShadow height="32.75" radius="7.6875" width="0.0" />
                                        </effect>
+                                       <children>
+                                          <TextArea fx:id="oldInfo" editable="false" focusTraversable="false" prefHeight="450.0" prefWidth="1080.0" promptText="They said, that having no Internet Connection is not good :(" style="-fx-background-color: transparent;" stylesheets="@textfield_style.css">
+                                             <font>
+                                                <Font name="Segoe UI" size="12.0" />
+                                             </font>
+                                          </TextArea>
+                                       </children>
                                     </AnchorPane>
                                     <ImageView fitHeight="80.0" fitWidth="276.0" layoutX="389.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

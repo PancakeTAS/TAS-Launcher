@@ -13,6 +13,7 @@ import de.pfannekuchen.accountapi.MojangAccount;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +43,7 @@ public class TASLauncher extends Application {
 	public static Object mcaccount;
 	private static Label accountlabel;
 	private static Stage stage;
+	private static boolean offlineMode;
 	
 	/**
 	 * You cannot start JavaFX from the Class itself, so here is a static method to do that
@@ -65,12 +68,21 @@ public class TASLauncher extends Application {
 		/* Load the Configuration File */
 		ConfigUtils.init(new File(System.getProperty("user.home") + "/launcher.properties"));
 		/* Load Launcher Data */
-		WebReader.readMainPage();
+		try {
+			WebReader.readMainPage();
+			WebReader.readPages();
+		} catch (Exception e) {
+			offlineMode = true;
+			e.printStackTrace();
+		}
 		for (String s : WebReader.LOTAS_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
 		for (String s : WebReader.PLAYBACK_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
 		for (String s : WebReader.TASBATTLE_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(2)).getChildren().get(2)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
 		for (String s : WebReader.UNSUP_CAT) ((ComboBox<String>) ((BorderPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(3)).getChildren().get(1)).getContent()).getChildren().get(1)).getLeft()).getItems().add(s.split(":")[0]);
-		
+		((TextArea) ((AnchorPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).getChildren().get(1)).getContent()).getChildren().get(2)).getChildren().get(0)).setText(WebReader.LOTAS);
+		((TextArea) ((AnchorPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).getChildren().get(2)).getContent()).getChildren().get(2)).getChildren().get(0)).setText(WebReader.PLAYBACK);
+		((TextArea) ((AnchorPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(2)).getChildren().get(2)).getContent()).getChildren().get(2)).getChildren().get(0)).setText(WebReader.TASBATTLE);
+		((TextArea) ((AnchorPane) ((AnchorPane) ((ScrollPane) ((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(3)).getChildren().get(1)).getContent()).getChildren().get(2)).getChildren().get(0)).setText(WebReader.UNSUPPORTED);
 		/* Thread for Loading an Account from the Accounts File */
 		Thread accountLoader = new Thread(new Runnable() {
 			
