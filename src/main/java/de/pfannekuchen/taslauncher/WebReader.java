@@ -113,6 +113,15 @@ public class WebReader {
 		for (int i = 0; i < LOTAS_PATCH.length; i++) {
 			LOTAS += "\n\n\n\n =================================================== " + ((String) LOTAS_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) LOTAS_PATCH[i].getValue());
 		}
+		for (int i = 0; i < PLAYBACK_PATCH.length; i++) {
+			PLAYBACK += "\n\n\n\n =================================================== " + ((String) PLAYBACK_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) PLAYBACK_PATCH[i].getValue());
+		}
+		for (int i = 0; i < TASBATTLE_PATCH.length; i++) {
+			TASBATTLE += "\n\n\n\n =================================================== " + ((String) TASBATTLE_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) TASBATTLE_PATCH[i].getValue());
+		}
+		for (int i = 0; i < UNSUP_PATCH.length; i++) {
+			UNSUPPORTED += "\n\n\n\n =================================================== " + ((String) UNSUP_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) UNSUP_PATCH[i].getValue());
+		}
 	}
 	
 }
