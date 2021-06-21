@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
+import de.pfannekuchen.taslauncher.TASLauncher;
 import de.pfannekuchen.taslauncher.util.ZipUtils;
 
 /**
@@ -28,7 +29,13 @@ public class MinecraftInstance {
 		this.libraries = libraries;
 		if (System.getProperty("os.name").toLowerCase().contains("win")) this.javaw = new File(javahome, "bin/javaw.exe").getAbsolutePath();
 		else this.javaw = new File(javahome, "bin/javaw").getAbsolutePath();
-		if (!dotMcFolder.exists()) installInstance();
+		if (!dotMcFolder.exists()) {
+			if (TASLauncher.offlineMode) {
+				System.err.println("Cannot install Instance because there is not internet connection");
+				return;
+			}
+			installInstance();
+		}
 	}
 	
 	/**

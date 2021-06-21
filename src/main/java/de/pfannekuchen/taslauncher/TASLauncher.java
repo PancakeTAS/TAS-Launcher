@@ -41,9 +41,9 @@ public class TASLauncher extends Application {
 
 	public static final File accountsFile = new File(System.getProperty("user.home") + "/accounts");
 	public static Object mcaccount;
+	public static boolean offlineMode;
 	private static Label accountlabel;
 	private static Stage stage;
-	private static boolean offlineMode;
 	
 	/**
 	 * You cannot start JavaFX from the Class itself, so here is a static method to do that
