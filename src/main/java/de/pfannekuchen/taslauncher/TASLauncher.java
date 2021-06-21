@@ -107,6 +107,7 @@ public class TASLauncher extends Application {
 								writer.close();
 							} else {
 								mcaccount = new MojangAccount(lines.get(1), UUID.fromString(lines.get(2)));
+								if (mcaccount == null) throw new Exception();
 								name = ((MojangAccount) mcaccount).getUsername();
 								// Write updated Stuff into the File
 								PrintWriter writer = new PrintWriter(new FileOutputStream(accountsFile, false));
@@ -120,7 +121,7 @@ public class TASLauncher extends Application {
 							});
 						} catch (Exception e) {
 							System.err.println("Could not load MC Account from File");
-							e.printStackTrace();
+							accountsFile.delete();
 						}
 					}
 				} catch (IOException e) {
