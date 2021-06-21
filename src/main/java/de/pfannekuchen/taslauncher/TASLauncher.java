@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import de.pfannekuchen.accountapi.MicrosoftAccount;
 import de.pfannekuchen.accountapi.MojangAccount;
@@ -17,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -27,9 +29,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -60,6 +64,7 @@ public class TASLauncher extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(loader.load()));
 		stage.setResizable(false);
+		hijackImageView(stage.getScene().getRoot());
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("tas_icon.png")));
 		stage.setTitle("Minecraft TAS Launcher");
 		stage.show();
@@ -195,6 +200,7 @@ public class TASLauncher extends Application {
 		loginStage = new Stage();
 		loginStage.setScene(new Scene(new FXMLLoader(getClass().getResource("Login.fxml")).load()));
 		loginStage.setResizable(false);
+		hijackImageView(loginStage.getScene().getRoot());
 		loginStage.getIcons().add(new Image(getClass().getResourceAsStream("tas_icon.png")));
 		loginStage.setTitle("Minecraft TAS Launcher - Login");
 		loginStage.show();
@@ -285,6 +291,40 @@ public class TASLauncher extends Application {
 		login_thread.setDaemon(true);
 		login_thread.setName("Login Thread");
 		login_thread.start();
+	}
+	
+	/* ================================== More Methods ================================== */
+	
+	/**
+	 * Recursivly loop through every single ImageView and add a Mouse Moved Event handler if it is a button
+	 */
+	public static void hijackImageView(Parent pane) {
+		((Pane) pane).getChildren().forEach(new Consumer<Node>() {
+			@Override
+			public void accept(Node t) {
+				if (t instanceof Pane) ((Pane) t).getChildren().forEach(this);
+				else if (t instanceof ScrollPane) hijackImageView((Parent) ((ScrollPane) t).getContent());
+				else if (t instanceof ImageView) {
+					if (((ImageView) t).getImage().getUrl().toLowerCase().contains("button_texture")) {
+						t.addEventHandler(MouseEvent.MOUSE_ENTERED, (mouseevent) -> {
+							t.setScaleX(1.02);
+							t.setScaleY(1.02);
+							t.setScaleZ(1.02);
+						});	
+						t.addEventHandler(MouseEvent.MOUSE_CLICKED, (mouseevent) -> {
+							t.setScaleX(1);
+							t.setScaleY(1);
+							t.setScaleZ(1);
+						});	
+						t.addEventHandler(MouseEvent.MOUSE_EXITED, (mouseevent) -> {
+							t.setScaleX(1);
+							t.setScaleY(1);
+							t.setScaleZ(1);
+						});	
+					}
+				}
+			}
+		});
 	}
 	
 }
