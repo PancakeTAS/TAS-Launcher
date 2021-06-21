@@ -15,10 +15,10 @@ group = "de.pfannekuchen.taslauncher"
 // Export for Java 16 Only
 sourceCompatibility = targetCompatibility = 1.16
 
-mainClassName = "$moduleName/de.pfannekuchen.taslauncher.Main"
+mainClassName = "$moduleName/de.pfannekuchen.taslauncher.main.Main"
 application {
     mainModule = 'TASLauncher'
-    mainClass = 'de.pfannekuchen.taslauncher.Main'
+    mainClass = 'de.pfannekuchen.taslauncher.main.Main'
 }
 
 jlink {

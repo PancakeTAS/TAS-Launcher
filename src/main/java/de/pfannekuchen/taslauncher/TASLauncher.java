@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import de.pfannekuchen.accountapi.MicrosoftAccount;
 import de.pfannekuchen.accountapi.MojangAccount;
+import de.pfannekuchen.taslauncher.util.ConfigUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;

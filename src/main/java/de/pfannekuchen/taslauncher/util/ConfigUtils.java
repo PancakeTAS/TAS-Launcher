@@ -1,4 +1,4 @@
-package de.pfannekuchen.taslauncher;
+package de.pfannekuchen.taslauncher.util;
 
 import java.io.File;
 import java.io.FileReader;

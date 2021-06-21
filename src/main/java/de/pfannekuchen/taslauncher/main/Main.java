@@ -1,4 +1,6 @@
-package de.pfannekuchen.taslauncher;
+package de.pfannekuchen.taslauncher.main;
+
+import de.pfannekuchen.taslauncher.TASLauncher;
 
 public class Main {
 
