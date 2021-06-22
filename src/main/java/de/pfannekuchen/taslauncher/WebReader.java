@@ -36,7 +36,7 @@ public class WebReader {
 	 * @throws IOException
 	 */
 	public static void readMainPage() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/tasbattlelauncher/main.dat").openStream()));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/Launcher.tl").openStream()));
 		Queue<String> lines = new LinkedList<>();
 		while (true) {
 			String s = reader.readLine();
@@ -44,84 +44,43 @@ public class WebReader {
 			if (!s.trim().startsWith("#")) lines.add(s);
 		}
 		String _line;
-		int gameCount;
-		/* Load Update Data */
-		_line = lines.poll();
-		if (version < Integer.parseInt(_line.split(":")[0])) update(new URL("http://mgnet.work/tasbattlelauncher/" + _line.split(":")[1]));
+		int _gameCount;
 		/* Load LoTAS Games */
 		_line = lines.poll();
-		gameCount = Integer.parseInt(_line);
-		LOTAS_CAT = new String[gameCount];
-		for (int i = 0; i < gameCount; i++) {
+		_gameCount = Integer.parseInt(_line);
+		LOTAS_CAT = new String[_gameCount];
+		for (int i = 0; i < _gameCount; i++) {
 			LOTAS_CAT[i] = lines.poll();
 		}
 		/* Load TAS Replay Games */
 		_line = lines.poll();
-		gameCount = Integer.parseInt(_line);
-		PLAYBACK_CAT = new String[gameCount];
-		for (int i = 0; i < gameCount; i++) {
+		_gameCount = Integer.parseInt(_line);
+		PLAYBACK_CAT = new String[_gameCount];
+		for (int i = 0; i < _gameCount; i++) {
 			PLAYBACK_CAT[i] = lines.poll();
 		}
 		/* Load TAS Battle Games */
 		_line = lines.poll();
-		gameCount = Integer.parseInt(_line);
-		TASBATTLE_CAT = new String[gameCount];
-		for (int i = 0; i < gameCount; i++) {
+		_gameCount = Integer.parseInt(_line);
+		TASBATTLE_CAT = new String[_gameCount];
+		for (int i = 0; i < _gameCount; i++) {
 			TASBATTLE_CAT[i] = lines.poll();
 		}
 		/* Load TAS Unsupported Games */
 		_line = lines.poll();
-		gameCount = Integer.parseInt(_line);
-		UNSUP_CAT = new String[gameCount];
-		for (int i = 0; i < gameCount; i++) {
+		_gameCount = Integer.parseInt(_line);
+		UNSUP_CAT = new String[_gameCount];
+		for (int i = 0; i < _gameCount; i++) {
 			UNSUP_CAT[i] = lines.poll();
 		}
 		reader.close();
 	}
-
-	/**
-	 * This Method updates the Client whenever the Version is lower than the required one.
-	 * TODO: Implement Updater
-	 */
-	private static void update(URL url) {
-		
-	}
-
-	private static Pair<?, ?>[] readSubpage(Pair<?, ?>[] target, String[] source) throws MalformedURLException, IOException {
-		target = new Pair<?, ?>[source.length];
-		for (int i = 0; i < source.length; i++) {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/tasbattlelauncher/" + source[i].split(":")[1]).openStream()));
-			target[i] = new Pair<String, String>(reader.readLine() + ";" + reader.readLine(), reader.lines().collect(Collectors.joining("\n")));
-		}
-		return target;
-	}
 	
 	public static void readPages() throws MalformedURLException, IOException {
-		InputStream stream = new URL("http://mgnet.work/tasbattlelauncher/lotas.dat").openStream();
-		LOTAS = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		stream = new URL("http://mgnet.work/tasbattlelauncher/playback.dat").openStream();
-		PLAYBACK = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		stream = new URL("http://mgnet.work/tasbattlelauncher/tasbattle.dat").openStream();
-		TASBATTLE = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		stream = new URL("http://mgnet.work/tasbattlelauncher/experimental.dat").openStream();
-		UNSUPPORTED = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		
-		WebReader.LOTAS_PATCH = WebReader.readSubpage(WebReader.LOTAS_PATCH, WebReader.LOTAS_CAT);
-		WebReader.PLAYBACK_PATCH = WebReader.readSubpage(WebReader.PLAYBACK_PATCH, WebReader.PLAYBACK_CAT);
-		WebReader.TASBATTLE_PATCH = WebReader.readSubpage(WebReader.TASBATTLE_PATCH, WebReader.TASBATTLE_CAT);
-		WebReader.UNSUP_PATCH = WebReader.readSubpage(WebReader.UNSUP_PATCH, WebReader.UNSUP_CAT);
-		for (int i = 0; i < LOTAS_PATCH.length; i++) {
-			LOTAS += "\n\n\n\n =================================================== " + ((String) LOTAS_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) LOTAS_PATCH[i].getValue());
-		}
-		for (int i = 0; i < PLAYBACK_PATCH.length; i++) {
-			PLAYBACK += "\n\n\n\n =================================================== " + ((String) PLAYBACK_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) PLAYBACK_PATCH[i].getValue());
-		}
-		for (int i = 0; i < TASBATTLE_PATCH.length; i++) {
-			TASBATTLE += "\n\n\n\n =================================================== " + ((String) TASBATTLE_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) TASBATTLE_PATCH[i].getValue());
-		}
-		for (int i = 0; i < UNSUP_PATCH.length; i++) {
-			UNSUPPORTED += "\n\n\n\n =================================================== " + ((String) UNSUP_PATCH[i].getKey()).split(";")[1] + " =================================================== \n\n\n\n" + ((String) UNSUP_PATCH[i].getValue());
-		}
+		LOTAS = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/LoTAS.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		PLAYBACK = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/TAS.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		TASBATTLE = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/TASBattle.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		UNSUPPORTED = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/OLD.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
 	}
 	
 }
