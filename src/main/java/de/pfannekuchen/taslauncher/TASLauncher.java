@@ -142,6 +142,8 @@ public class TASLauncher extends Application {
 			if (!ConfigUtils.getBoolean("root", "showexperimental")) ((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(4).setVisible(false);
 			((CheckBox) ((VBox) ((HBox) stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(5)).setSelected(ConfigUtils.getBoolean("root", "showexperimental"));
 		});
+		
+		WebReader.readInstances();
 	}
 	
 	/* ================================== Events for Right Side of Main Menu Pane ================================== */

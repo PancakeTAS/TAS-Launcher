@@ -1,55 +1,45 @@
 package de.pfannekuchen.taslauncher.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class ZipUtils {
-	
-	public static void unzipJar(String destinationDir, String jarPath) throws IOException {
-		File file = new File(jarPath);
-		JarFile jar = new JarFile(file);
-	
-		// fist get all directories,
-		// then make those directory on the destination Path
-		for (Enumeration<JarEntry> enums = jar.entries(); enums.hasMoreElements();) {
-			JarEntry entry = (JarEntry) enums.nextElement();
-	
-			String fileName = destinationDir + File.separator + entry.getName();
-			File f = new File(fileName);
-	
-			if (fileName.endsWith("/")) {
-				f.mkdirs();
-			}
-	
-		}
-	
-		//now create all files
-		for (Enumeration<JarEntry> enums = jar.entries(); enums.hasMoreElements();) {
-			JarEntry entry = (JarEntry) enums.nextElement();
-	
-			String fileName = destinationDir + File.separator + entry.getName();
-			File f = new File(fileName);
-	
-			if (!fileName.endsWith("/")) {
-				InputStream is = jar.getInputStream(entry);
-				FileOutputStream fos = new FileOutputStream(f);
-	
-				// write contents of 'is' to 'fos'
-				while (is.available() > 0) {
-					fos.write(is.read());
+
+	@SuppressWarnings("resource")
+	public static void unzipJar(String destDir, String jarPath) throws IOException {
+		byte[] buffer = new byte[1024];
+		final ZipInputStream zis = new ZipInputStream(new FileInputStream(jarPath));
+		ZipEntry zipEntry = zis.getNextEntry();
+		while (zipEntry != null) {
+			File newFile = new File(destDir, zipEntry.getName());
+			if (zipEntry.isDirectory()) {
+				if (!newFile.isDirectory() && !newFile.mkdirs()) {
+					throw new IOException("Failed to create directory " + newFile);
 				}
-	
+			} else {
+				// fix for Windows-created archives
+				File parent = newFile.getParentFile();
+				if (!parent.isDirectory() && !parent.mkdirs()) {
+					throw new IOException("Failed to create directory " + parent);
+				}
+
+				// write file content
+				FileOutputStream fos = new FileOutputStream(newFile);
+				int len;
+				while ((len = zis.read(buffer)) > 0) {
+					fos.write(buffer, 0, len);
+				}
 				fos.close();
-				is.close();
 			}
+			zipEntry = zis.getNextEntry();
 		}
-		jar.close();
+		zis.closeEntry();
+		zis.close();
 	}
-	
+
 }
 

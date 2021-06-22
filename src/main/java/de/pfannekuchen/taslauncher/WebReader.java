@@ -2,7 +2,6 @@ package de.pfannekuchen.taslauncher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,8 +10,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-import javafx.util.Pair;
-
 public class WebReader {
 
 	public static final int version = 1;
@@ -20,11 +17,6 @@ public class WebReader {
 	public static String[] PLAYBACK_CAT;
 	public static String[] TASBATTLE_CAT;
 	public static String[] UNSUP_CAT;
-	
-	public static Pair<?, ?>[] LOTAS_PATCH;
-	public static Pair<?, ?>[] PLAYBACK_PATCH;
-	public static Pair<?, ?>[] TASBATTLE_PATCH;
-	public static Pair<?, ?>[] UNSUP_PATCH;
 	
 	public static String LOTAS;
 	public static String PLAYBACK;
@@ -74,6 +66,13 @@ public class WebReader {
 			UNSUP_CAT[i] = lines.poll();
 		}
 		reader.close();
+	}
+	
+	/**
+	 * This Part of Code reads all Minecraft Instances into Minecraft Strings, which can then be easily launched
+	 */
+	public static void readInstances() throws MalformedURLException, IOException {
+		// TODO: Well.. do this part and link it up to the buttons
 	}
 	
 	public static void readPages() throws MalformedURLException, IOException {
