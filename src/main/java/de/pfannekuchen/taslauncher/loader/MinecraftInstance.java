@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.pfannekuchen.accountapi.MicrosoftAccount;
+import de.pfannekuchen.accountapi.MojangAccount;
 import de.pfannekuchen.taslauncher.TASLauncher;
 import de.pfannekuchen.taslauncher.util.ZipUtils;
 
@@ -87,7 +89,26 @@ public class MinecraftInstance {
 	public MinecraftInstance(String name, File javahome, List<URL> libraries, String main, String args, List<URL> mods) throws IOException {
 		dotMcFolder = new File(System.getProperty("user.home"), ".minecraft_" + name);
 		this.main = main;
-		this.args = args.replaceAll("%MCDATADIR%", dotMcFolder.getAbsolutePath().replaceAll("\\\\", "\\/"));
+		
+		String username;
+		String uuid;
+		String accesstoken;
+		if (TASLauncher.mcaccount instanceof MojangAccount) {
+			username = ((MojangAccount) TASLauncher.mcaccount).getUsername();
+			uuid = ((MojangAccount) TASLauncher.mcaccount).getUuid().toString().replaceAll("-", "");
+			accesstoken = ((MojangAccount) TASLauncher.mcaccount).getAccessToken();
+		} else {
+			username = ((MicrosoftAccount) TASLauncher.mcaccount).getUsername();
+			uuid = ((MicrosoftAccount) TASLauncher.mcaccount).getUuid().toString().replaceAll("-", "");
+			accesstoken = ((MicrosoftAccount) TASLauncher.mcaccount).getAccessToken();
+		}
+		
+		this.args = args.replaceAll("%GAMEDIR%", dotMcFolder.getAbsolutePath()
+				.replaceAll("\\\\", "\\/"))
+				.replaceAll("%ASSETSDIR%", dotMcFolder.getAbsolutePath().replaceAll("\\\\", "\\/") + "/assets")
+				.replaceAll("%USERNAME%", username)
+				.replaceAll("%UUID%", uuid)
+				.replaceAll("%ACCESSTOKEN%", accesstoken);
 		this.libraries = libraries;
 		if (System.getProperty("os.name").toLowerCase().contains("win")) this.javaw = new File(javahome, "bin/java.exe").getAbsolutePath();
 		else this.javaw = new File(javahome, "bin/java").getAbsolutePath();
