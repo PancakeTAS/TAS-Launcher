@@ -155,7 +155,10 @@ public class TASLauncher extends Application {
 		int selected = box.getSelectionModel().getSelectedIndex();
 		if (selected == -1) selected = 0;
 		try {
-			WebReader.LOTAS_STRING[selected].getInstance().launch();
+			if (((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(0)).isVisible()) WebReader.LOTAS_STRING[selected].getInstance().launch();
+			else if (((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(1)).isVisible()) WebReader.PLAYBACK_STRING[selected].getInstance().launch();
+			else if (((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(2)).isVisible()) WebReader.TASBATTLE_STRING[selected].getInstance().launch();
+			else if (((VBox) ((AnchorPane) ((HBox) ((AnchorPane) stage.getScene().getRoot()).getChildren().get(0)).getChildren().get(1)).getChildren().get(3)).isVisible()) WebReader.UNSUP_STRING[selected].getInstance().launch();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

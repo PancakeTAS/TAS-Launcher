@@ -145,6 +145,14 @@ public class MinecraftInstance {
 				Files.copy(libraries.get(i).openStream(), new File(dotMcFolder, "libs/" + lib[lib.length - 1]).toPath());
 			}
 		}
+		// Download Music Data
+		try {
+			Files.copy(new URL("http://mgnet.work/launcher/assets.zip").openStream(), new File(dotMcFolder, "assets.zip").toPath(), StandardCopyOption.REPLACE_EXISTING);
+			ZipUtils.unzipJar(new File(dotMcFolder, "assets").getAbsolutePath(), new File(dotMcFolder, "assets.zip").getAbsolutePath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Done downloading sounds...");
 	}
 	
 }
