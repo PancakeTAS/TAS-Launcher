@@ -150,18 +150,15 @@ public class TASLauncher extends Application {
 	
 	/**
 	 * Automatically called by the Gui once you click on "Start Client"
-	 * TODO: Start the Minecraft Client and or Set it up
 	 */
-	@FXML private void startClient() {
-		
-	}
-	
-	/**
-	 * Automatically called by the Gui once a new Gamemode has been selected in the Drop Down Menu
-	 * TODO: Update the Pane and request new Information from the Server
-	 */
-	@FXML private void switchGamemode() {
-
+	private static void startClient(ComboBox<String> box) {
+		int selected = box.getSelectionModel().getSelectedIndex();
+		if (selected == -1) selected = 0;
+		try {
+			WebReader.LOTAS_STRING[selected].getInstance().launch();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/* ================================== Events for Left Side of Main Menu Pane ================================== */
@@ -302,6 +299,7 @@ public class TASLauncher extends Application {
 	 */
 	public static void hijackImageView(Parent pane) {
 		((Pane) pane).getChildren().forEach(new Consumer<Node>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void accept(Node t) {
 				if (t instanceof Pane) ((Pane) t).getChildren().forEach(this);
@@ -309,19 +307,24 @@ public class TASLauncher extends Application {
 				else if (t instanceof ImageView) {
 					if (((ImageView) t).getImage().getUrl().toLowerCase().contains("button_texture")) {
 						t.addEventHandler(MouseEvent.MOUSE_ENTERED, (mouseevent) -> {
-							t.setScaleX(1.02);
-							t.setScaleY(1.02);
-							t.setScaleZ(1.02);
+							t.setOpacity(0.8);
 						});	
 						t.addEventHandler(MouseEvent.MOUSE_CLICKED, (mouseevent) -> {
-							t.setScaleX(1);
-							t.setScaleY(1);
-							t.setScaleZ(1);
+							t.setOpacity(0.2);
+							new Thread(() -> {
+								try {
+									startClient((ComboBox<String>) ((BorderPane) t.getParent().getChildrenUnmodifiable().get(1)).getLeft());
+									Thread.sleep(500);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								Platform.runLater(() -> {
+									Platform.exit();
+								});
+							}).start();
 						});	
 						t.addEventHandler(MouseEvent.MOUSE_EXITED, (mouseevent) -> {
-							t.setScaleX(1);
-							t.setScaleY(1);
-							t.setScaleZ(1);
+							t.setOpacity(1);
 						});	
 					}
 				}

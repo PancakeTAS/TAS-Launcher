@@ -10,6 +10,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
+import de.pfannekuchen.taslauncher.loader.MinecraftInstance.MinecraftString;
+
 public class WebReader {
 
 	public static final int version = 1;
@@ -17,6 +19,11 @@ public class WebReader {
 	public static String[] PLAYBACK_CAT;
 	public static String[] TASBATTLE_CAT;
 	public static String[] UNSUP_CAT;
+	
+	public static MinecraftString[] LOTAS_STRING;
+	public static MinecraftString[] PLAYBACK_STRING;
+	public static MinecraftString[] TASBATTLE_STRING;
+	public static MinecraftString[] UNSUP_STRING;
 	
 	public static String LOTAS;
 	public static String PLAYBACK;
@@ -41,6 +48,7 @@ public class WebReader {
 		_line = lines.poll();
 		_gameCount = Integer.parseInt(_line);
 		LOTAS_CAT = new String[_gameCount];
+		LOTAS_STRING = new MinecraftString[_gameCount];
 		for (int i = 0; i < _gameCount; i++) {
 			LOTAS_CAT[i] = lines.poll();
 		}
@@ -48,6 +56,7 @@ public class WebReader {
 		_line = lines.poll();
 		_gameCount = Integer.parseInt(_line);
 		PLAYBACK_CAT = new String[_gameCount];
+		PLAYBACK_STRING = new MinecraftString[_gameCount];
 		for (int i = 0; i < _gameCount; i++) {
 			PLAYBACK_CAT[i] = lines.poll();
 		}
@@ -55,6 +64,7 @@ public class WebReader {
 		_line = lines.poll();
 		_gameCount = Integer.parseInt(_line);
 		TASBATTLE_CAT = new String[_gameCount];
+		TASBATTLE_STRING = new MinecraftString[_gameCount];
 		for (int i = 0; i < _gameCount; i++) {
 			TASBATTLE_CAT[i] = lines.poll();
 		}
@@ -62,6 +72,7 @@ public class WebReader {
 		_line = lines.poll();
 		_gameCount = Integer.parseInt(_line);
 		UNSUP_CAT = new String[_gameCount];
+		UNSUP_STRING = new MinecraftString[_gameCount];
 		for (int i = 0; i < _gameCount; i++) {
 			UNSUP_CAT[i] = lines.poll();
 		}
@@ -71,8 +82,17 @@ public class WebReader {
 	/**
 	 * This Part of Code reads all Minecraft Instances into Minecraft Strings, which can then be easily launched
 	 */
-	public static void readInstances() throws MalformedURLException, IOException {
-		// TODO: Well.. do this part and link it up to the buttons
+	public static void readInstances() {
+		new Thread(() -> {
+			try {
+				for (int i = 0; i < LOTAS_CAT.length; i++) LOTAS_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + LOTAS_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < PLAYBACK_CAT.length; i++) PLAYBACK_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + PLAYBACK_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < TASBATTLE_CAT.length; i++) TASBATTLE_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + TASBATTLE_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < UNSUP_CAT.length; i++) UNSUP_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + UNSUP_CAT[i].split(":")[1]).openStream())).lines().toList());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}).start();
 	}
 	
 	public static void readPages() throws MalformedURLException, IOException {

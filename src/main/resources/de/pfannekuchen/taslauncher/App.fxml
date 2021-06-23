@@ -203,7 +203,7 @@
                                     </ImageView>
                                     <BorderPane layoutY="423.0" prefHeight="70.0" prefWidth="1080.0" style="-fx-background-color: #262626;">
                                        <left>
-                                          <ComboBox fx:id="gamemodes" onAction="#switchGamemode" prefHeight="56.0" prefWidth="260.0" promptText="LoTAS 1.12.2" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER">
+                                          <ComboBox fx:id="gamemodes" prefHeight="56.0" prefWidth="260.0" promptText="LoTAS 1.12.2" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER">
                                     </ComboBox>
                                        </left>
                                     </BorderPane>
@@ -278,7 +278,7 @@
                                     </ImageView>
                                     <BorderPane layoutY="423.0" prefHeight="70.0" prefWidth="1080.0" style="-fx-background-color: #262626;">
                                        <left>
-                                          <ComboBox fx:id="gamemodes11" onAction="#switchGamemode" prefHeight="56.0" prefWidth="260.0" promptText="No Playback Mod" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER" />
+                                          <ComboBox fx:id="gamemodes11" prefHeight="56.0" prefWidth="260.0" promptText="No Playback Mod" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER" />
                                        </left>
                                     </BorderPane>
                                     <AnchorPane layoutY="493.0" prefHeight="4000.0" prefWidth="1080.0" style="-fx-background-color: #333333;">
@@ -352,7 +352,7 @@
                                     </ImageView>
                                     <BorderPane layoutY="423.0" prefHeight="70.0" prefWidth="1080.0" style="-fx-background-color: #262626;">
                                        <left>
-                                          <ComboBox fx:id="gamemodes1" onAction="#switchGamemode" prefHeight="56.0" prefWidth="260.0" promptText="No Gamemode selected" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER" />
+                                          <ComboBox fx:id="gamemodes1" prefHeight="56.0" prefWidth="260.0" promptText="No Gamemode selected" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER" />
                                        </left>
                                     </BorderPane>
                                     <AnchorPane layoutY="493.0" prefHeight="4000.0" prefWidth="1080.0" style="-fx-background-color: #333333;">
@@ -417,7 +417,7 @@
                                     </ImageView>
                                     <BorderPane layoutY="423.0" prefHeight="70.0" prefWidth="1080.0" style="-fx-background-color: #262626;">
                                        <left>
-                                          <ComboBox fx:id="gamemodes12" onAction="#switchGamemode" prefHeight="56.0" prefWidth="260.0" promptText="TickrateChanger 1.12.2" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER" />
+                                          <ComboBox fx:id="gamemodes12" prefHeight="56.0" prefWidth="260.0" promptText="TickrateChanger 1.12.2" style="-fx-font: 14px &quot;Segoe UI Black&quot;;" styleClass="animate" stylesheets="@combobox_style.css" BorderPane.alignment="CENTER" />
                                        </left>
                                     </BorderPane>
                                     <AnchorPane layoutY="493.0" prefHeight="4000.0" prefWidth="1080.0" style="-fx-background-color: #333333;">
