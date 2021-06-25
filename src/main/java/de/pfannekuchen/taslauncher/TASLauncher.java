@@ -318,12 +318,12 @@ public class TASLauncher extends Application {
 								try {
 									startClient((ComboBox<String>) ((BorderPane) t.getParent().getChildrenUnmodifiable().get(1)).getLeft());
 									Thread.sleep(500);
+									Platform.runLater(() -> {
+										Platform.exit();
+									});
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
-								Platform.runLater(() -> {
-									Platform.exit();
-								});
 							}).start();
 						});	
 						t.addEventHandler(MouseEvent.MOUSE_EXITED, (mouseevent) -> {
