@@ -42,11 +42,11 @@ jlink {
 
 repositories {
 	mavenCentral()
-	maven { url = "https://mgnet.work/repo" }
+	maven { url = "https://maven.mgnet.work" }
 }
 
 dependencies {
-	implementation group: 'de.pfannekuchen', name: 'accountapi', version: '1.1.0'
+	implementation group: 'de.pfannekuchen', name: 'accountapi', version: '1.1.0-SNAPSHOT'
 }
 
 project.getAllTasks(true).each { key, val -> 

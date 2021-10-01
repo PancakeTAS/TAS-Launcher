@@ -34,8 +34,8 @@ public class MinecraftInstance {
 			if (!this.javahome.exists()) {
 				this.javahome.mkdirs();
 				URL downloadJRE;
-				if (System.getProperty("os.name").toLowerCase().contains("win")) downloadJRE = new URL("http://mgnet.work/launcher/J" + jre + "-win.zip");
-				else downloadJRE = new URL("http://mgnet.work/launcher/J" + jre + "-unix.zip");
+				if (System.getProperty("os.name").toLowerCase().contains("win")) downloadJRE = new URL("https://data.mgnet.work/taslauncher/J" + jre + "-win.zip");
+				else downloadJRE = new URL("https://data.mgnet.work/taslauncher/J" + jre + "-unix.zip");
 				Files.copy(downloadJRE.openStream(), new File(System.getProperty("user.home"), ".launcher/" + jre + ".zip").toPath());
 				ZipUtils.unzipJar(javahome.getAbsolutePath(), new File(System.getProperty("user.home"), ".launcher/" + jre + ".zip").getAbsolutePath());
 				System.out.println("Done downloading Jar");
@@ -168,7 +168,7 @@ public class MinecraftInstance {
 		}
 		// Download Music Data
 		try {
-			Files.copy(new URL("http://mgnet.work/launcher/assets.zip").openStream(), new File(dotMcFolder, "assets.zip").toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(new URL("https://data.mgnet.work/taslauncher/assets.zip").openStream(), new File(dotMcFolder, "assets.zip").toPath(), StandardCopyOption.REPLACE_EXISTING);
 			ZipUtils.unzipJar(new File(dotMcFolder, "assets").getAbsolutePath(), new File(dotMcFolder, "assets.zip").getAbsolutePath());
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -35,7 +35,7 @@ public class WebReader {
 	 * @throws IOException
 	 */
 	public static void readMainPage() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/Launcher.tl").openStream()));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/Launcher.tl").openStream()));
 		Queue<String> lines = new LinkedList<>();
 		while (true) {
 			String s = reader.readLine();
@@ -85,10 +85,10 @@ public class WebReader {
 	public static void readInstances() {
 		new Thread(() -> {
 			try {
-				for (int i = 0; i < LOTAS_CAT.length; i++) LOTAS_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + LOTAS_CAT[i].split(":")[1]).openStream())).lines().toList());
-				for (int i = 0; i < PLAYBACK_CAT.length; i++) PLAYBACK_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + PLAYBACK_CAT[i].split(":")[1]).openStream())).lines().toList());
-				for (int i = 0; i < TASBATTLE_CAT.length; i++) TASBATTLE_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + TASBATTLE_CAT[i].split(":")[1]).openStream())).lines().toList());
-				for (int i = 0; i < UNSUP_CAT.length; i++) UNSUP_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/" + UNSUP_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < LOTAS_CAT.length; i++) LOTAS_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/" + LOTAS_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < PLAYBACK_CAT.length; i++) PLAYBACK_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/" + PLAYBACK_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < TASBATTLE_CAT.length; i++) TASBATTLE_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/" + TASBATTLE_CAT[i].split(":")[1]).openStream())).lines().toList());
+				for (int i = 0; i < UNSUP_CAT.length; i++) UNSUP_STRING[i] = MinecraftString.fromFile(new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/" + UNSUP_CAT[i].split(":")[1]).openStream())).lines().toList());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -96,10 +96,10 @@ public class WebReader {
 	}
 	
 	public static void readPages() throws MalformedURLException, IOException {
-		LOTAS = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/LoTAS.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		PLAYBACK = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/TAS.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		TASBATTLE = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/TASBattle.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
-		UNSUPPORTED = new BufferedReader(new InputStreamReader(new URL("http://mgnet.work/launcher/OLD.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		LOTAS = new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/LoTAS.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		PLAYBACK = new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/TAS.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		TASBATTLE = new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/TASBattle.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+		UNSUPPORTED = new BufferedReader(new InputStreamReader(new URL("https://data.mgnet.work/taslauncher/OLD.tl").openStream(), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
 	}
 	
 }
